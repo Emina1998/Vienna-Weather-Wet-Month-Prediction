@@ -131,8 +131,27 @@ The file covers all 38 columns across the three tables.
 Semantic mappings are added to DBRepo metadata via the REST API using the notebook at `notebooks/t2_2_semantic_mapping_upload.ipynb`.
 
 
+## Unit mapping
+
+Units are mapped using the Ontology of Units of Measure 2 (OM-2) URIs
+(http://www.ontology-of-units-of-measure.org/resource/om-2/).
+OM-2 was chosen because it is the ontology registered in the DBRepo instance
+used for this project, and it provides well-defined concepts for all units
+needed in this weather dataset, including degree Celsius, hectopascal,
+millimetre, metre per second, percent, hour, metre, and dimensionless quantities.
+The SI Digital Framework was considered as the primary ontology per assignment
+guidelines, but OM-2 was selected as it is directly supported by the DBRepo
+metadata infrastructure used in this project.
+
+Physical measurement columns are mapped to their actual measurement units.
+Count columns and numeric identifiers are mapped to `om-2/one` (dimensionless).
+
+The full mapping is documented in [`docs/unit_mapping.csv`](docs/unit_mapping.csv).
+
 ## Licences
 
 Input dataset: CC BY 4.0 (source data.gv.at)
 Source code: MIT License
 Generated outputs: To be assigned in later stages
+
+
