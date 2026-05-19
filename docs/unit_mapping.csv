@@ -10,21 +10,21 @@ weather_measurement,mean_t_min_c,http://www.ontology-of-units-of-measure.org/res
 weather_measurement,p_mean_hpa,http://www.ontology-of-units-of-measure.org/resource/om-2/hectopascal,hectopascal
 weather_measurement,p_max_hpa,http://www.ontology-of-units-of-measure.org/resource/om-2/hectopascal,hectopascal
 weather_measurement,p_min_hpa,http://www.ontology-of-units-of-measure.org/resource/om-2/hectopascal,hectopascal
-weather_measurement,precp_sum_mm,http://www.ontology-of-units-of-measure.org/resource/om-2/millimetre,millimetre
-weather_measurement,num_precp_01,http://www.ontology-of-units-of-measure.org/resource/om-2/one,unitless count
+weather_measurement,precp_sum_mm,http://www.ontology-of-units-of-measure.org/resource/om-2/millimetre,millimeter
+weather_measurement,num_precp_01,http://www.ontology-of-units-of-measure.org/resource/om-2/one,number
 weather_measurement,rel_hum_pct,http://www.ontology-of-units-of-measure.org/resource/om-2/percent,percent
 weather_measurement,rel_hum_max_pct,http://www.ontology-of-units-of-measure.org/resource/om-2/percent,percent
 weather_measurement,rel_hum_min_pct,http://www.ontology-of-units-of-measure.org/resource/om-2/percent,percent
-weather_measurement,wind_vel_ms,http://www.ontology-of-units-of-measure.org/resource/om-2/metrePerSecond-Time,metre per second
-weather_measurement,wind_vel_max_ms,http://www.ontology-of-units-of-measure.org/resource/om-2/metrePerSecond-Time,metre per second
-weather_measurement,num_wind_vel60,http://www.ontology-of-units-of-measure.org/resource/om-2/one,unitless count
+weather_measurement,wind_vel_ms,http://www.ontology-of-units-of-measure.org/resource/om-2/metrePerSecond-Time,meter per second
+weather_measurement,wind_vel_max_ms,http://www.ontology-of-units-of-measure.org/resource/om-2/metrePerSecond-Time,meter per second
+weather_measurement,num_wind_vel60,http://www.ontology-of-units-of-measure.org/resource/om-2/one,number
 weather_measurement,sun_h,http://www.ontology-of-units-of-measure.org/resource/om-2/hour,hour
-weather_measurement,num_clear,http://www.ontology-of-units-of-measure.org/resource/om-2/one,unitless count
-weather_measurement,num_cloud,http://www.ontology-of-units-of-measure.org/resource/om-2/one,unitless count
-weather_measurement,num_frost,http://www.ontology-of-units-of-measure.org/resource/om-2/one,unitless count
-weather_measurement,num_ice,http://www.ontology-of-units-of-measure.org/resource/om-2/one,unitless count
-weather_measurement,num_summer,http://www.ontology-of-units-of-measure.org/resource/om-2/one,unitless count
-weather_measurement,num_heat,http://www.ontology-of-units-of-measure.org/resource/om-2/one,unitless count
+weather_measurement,num_clear,http://www.ontology-of-units-of-measure.org/resource/om-2/one,number
+weather_measurement,num_cloud,http://www.ontology-of-units-of-measure.org/resource/om-2/one,number
+weather_measurement,num_frost,http://www.ontology-of-units-of-measure.org/resource/om-2/one,number
+weather_measurement,num_ice,http://www.ontology-of-units-of-measure.org/resource/om-2/one,number
+weather_measurement,num_summer,http://www.ontology-of-units-of-measure.org/resource/om-2/one,number
+weather_measurement,num_heat,http://www.ontology-of-units-of-measure.org/resource/om-2/one,number
 time_dimension,time_id,http://www.ontology-of-units-of-measure.org/resource/om-2/one,unitless
 time_dimension,ref_year,http://www.ontology-of-units-of-measure.org/resource/om-2/year,year
 time_dimension,ref_month,http://www.ontology-of-units-of-measure.org/resource/om-2/month,month
@@ -33,4 +33,4 @@ station,district_code,http://www.ontology-of-units-of-measure.org/resource/om-2/
 station,sub_district_code,http://www.ontology-of-units-of-measure.org/resource/om-2/one,unitless
 station,latitude_deg,http://www.ontology-of-units-of-measure.org/resource/om-2/degree,degree
 station,longitude_deg,http://www.ontology-of-units-of-measure.org/resource/om-2/degree,degree
-station,altitude_m,http://www.ontology-of-units-of-measure.org/resource/om-2/metre,metre
+station,altitude_m,http://www.ontology-of-units-of-measure.org/resource/om-2/metre,meter

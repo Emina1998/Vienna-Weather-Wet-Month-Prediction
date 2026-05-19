@@ -133,20 +133,27 @@ Semantic mappings are added to DBRepo metadata via the REST API using the notebo
 
 ## Unit mapping
 
-Units are mapped using the Ontology of Units of Measure 2 (OM-2) URIs
-(http://www.ontology-of-units-of-measure.org/resource/om-2/).
-OM-2 was chosen because it is the ontology registered in the DBRepo instance
-used for this project, and it provides well-defined concepts for all units
-needed in this weather dataset, including degree Celsius, hectopascal,
-millimetre, metre per second, percent, hour, metre, and dimensionless quantities.
-The SI Digital Framework was considered as the primary ontology per assignment
-guidelines, but OM-2 was selected as it is directly supported by the DBRepo
-metadata infrastructure used in this project.
+All numeric attributes in the database schema were mapped to ontology-based
+units using QUDT URIs.
 
-Physical measurement columns are mapped to their actual measurement units.
-Count columns and numeric identifiers are mapped to `om-2/one` (dimensionless).
+QUDT was selected as a practical fallback to the SI Digital Framework because
+it provides stable and widely used URIs for all units needed in this weather
+dataset, including degree Celsius, hectopascal, millimeter, meter per second,
+percent, hour, meter, and dimensionless quantities.
 
-The full mapping is documented in [`docs/unit_mapping.csv`](docs/unit_mapping.csv).
+Physical measurement columns were mapped to their corresponding scientific
+units, while count-based columns (such as number of frost days or cloudy days)
+were mapped to `number`. Numeric identifiers and administrative codes were
+mapped to `unitless` because they represent references or codes rather than
+physical measurements.
+
+The mappings are stored in `docs/unit_mapping.csv` and validated against the
+live DBRepo schema through the DBRepo Python client.
+
+An attempt was made to integrate the mappings directly into DBRepo metadata
+through the REST API. However, the current DBRepo test instance does not expose
+a stable public endpoint for updating column-level unit metadata, therefore
+the mappings are maintained within the repository as FAIR metadata resources.
 
 ## Licences
 
