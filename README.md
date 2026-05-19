@@ -34,6 +34,10 @@ Documentation, metadata, validation files.
 
 Contains configuration files for models and data processing.
 
+### sql/ 
+
+Contains SQL definitions for the database schema and DBRepo views.
+
 ### File naming convention
 A consistent naming convention is applied across all files:
 
@@ -97,7 +101,7 @@ Both choices remain within QUDT and are more accurate representations of the und
 
 ## Database schema
 
-Three tables are defined in `schema.sql`:
+Three tables are defined in `create_schema.sql`:
 
 - `station` — metadata for each measurement station (location, administrative codes, coordinates)
 - `time_dimension` — normalised year/month time reference
@@ -155,10 +159,50 @@ through the REST API. However, the current DBRepo test instance does not expose
 a stable public endpoint for updating column-level unit metadata, therefore
 the mappings are maintained within the repository as FAIR metadata resources.
 
+
+
+## DBRepo views
+
+The experiment defines several SQL views to expose query-ready data for the machine learning pipeline.
+
+### `weather_features_all`
+
+Main ML-ready feature view. It joins monthly weather measurements with the time dimension and station metadata. It contains all weather input features, temporal variables, station information, and the derived binary target variable `wet_month_label`.
+
+The target variable is defined as:
+
+```sql
+CASE WHEN precp_sum_mm >= 60 THEN 1 ELSE 0 END
+```
+
+where `1` indicates a wet month and `0` indicates a dry month.
+
+### `weather_train`
+
+Training split containing observations up to and including 2016.
+
+### `weather_validation`
+
+Validation split containing observations from 2017 to 2019.
+
+### `weather_test`
+
+Held-out test split containing observations from 2020 onward.
+
+### `monthly_precipitation_summary`
+
+Aggregation view that summarizes average, minimum, and maximum monthly precipitation by calendar month. This view is used for exploratory analysis and for checking seasonal precipitation patterns.
+
+### DBRepo-compatible view
+
+In addition to the SQL definitions, a DBRepo-compatible view named `weather_measurement_features` was created through the DBRepo Python API. This view exposes the measurement columns from the `weather_measurement` table and can be retrieved through the DBRepo view API.
+
+The SQL definitions are stored in `sql/create_views.sql`, and the DBRepo view creation is implemented in `notebooks/04_create_dbrepo_views.ipynb`.
+
+
 ## Licences
 
 Input dataset: CC BY 4.0 (source data.gv.at)
 Source code: MIT License
 Generated outputs: To be assigned in later stages
-
 
