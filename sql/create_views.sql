@@ -8,7 +8,7 @@
 -- View 1: Full ML feature table
 -- ============================================================
 
-CREATE VIEW weather_features_all AS
+CREATE OR REPLACE VIEW weather_features_all AS
 SELECT
     wm.measurement_id,
     wm.station_num,
@@ -60,7 +60,7 @@ SELECT
         ELSE 0
     END AS wet_month_label
 
-FROM weather_measurement wm
+FROM weather_measurement_v2 wm
 JOIN time_dimension td
     ON wm.time_id = td.time_id
 JOIN station s
@@ -71,7 +71,7 @@ JOIN station s
 -- View 2: Training split
 -- ============================================================
 
-CREATE VIEW weather_train AS
+CREATE OR REPLACE VIEW weather_train AS
 SELECT *
 FROM weather_features_all
 WHERE ref_year <= 2016;
@@ -81,7 +81,7 @@ WHERE ref_year <= 2016;
 -- View 3: Validation split
 -- ============================================================
 
-CREATE VIEW weather_validation AS
+CREATE OR REPLACE VIEW weather_validation AS
 SELECT *
 FROM weather_features_all
 WHERE ref_year BETWEEN 2017 AND 2019;
@@ -91,7 +91,7 @@ WHERE ref_year BETWEEN 2017 AND 2019;
 -- View 4: Test split
 -- ============================================================
 
-CREATE VIEW weather_test AS
+CREATE OR REPLACE VIEW weather_test AS
 SELECT *
 FROM weather_features_all
 WHERE ref_year >= 2020;
@@ -101,7 +101,7 @@ WHERE ref_year >= 2020;
 -- View 5: Monthly precipitation summary
 -- ============================================================
 
-CREATE VIEW monthly_precipitation_summary AS
+CREATE OR REPLACE VIEW monthly_precipitation_summary AS
 SELECT
     ref_month,
     AVG(precp_sum_mm) AS avg_precipitation_mm,

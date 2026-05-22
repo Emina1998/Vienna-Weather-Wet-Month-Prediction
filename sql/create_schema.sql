@@ -12,15 +12,15 @@ CREATE TABLE station (
 
 -- Time dim
 CREATE TABLE time_dimension (
-    time_id SERIAL PRIMARY KEY,
+    time_id INTEGER PRIMARY KEY,
     ref_year  SMALLINT NOT NULL CHECK (ref_year >= 1872),
     ref_month SMALLINT NOT NULL CHECK (ref_month BETWEEN 1 AND 12),
     UNIQUE (ref_year, ref_month)
 );
 
 -- Weather measurements
-CREATE TABLE weather_measurement (
-    measurement_id  SERIAL  PRIMARY KEY,
+CREATE TABLE weather_measurement_v2 (
+    measurement_id  INTEGER  PRIMARY KEY,
     station_num     INTEGER NOT NULL REFERENCES station(station_num),
     time_id         INTEGER NOT NULL REFERENCES time_dimension(time_id),
     UNIQUE (station_num, time_id),

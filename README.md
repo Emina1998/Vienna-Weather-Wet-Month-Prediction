@@ -7,6 +7,7 @@ Machine learning experiment predicting whether a month in Vienna is wet or dry u
 ### data/
 
 raw/: Contains the original dataset as obtained from the source (source data.gv.at)
+
 - processed/: Contains cleaned and transformed datasets used for model training.
 - external/: additional sources
 
@@ -17,14 +18,14 @@ data/: data loading scripts
 features/: feature engineering
 models/: model training
 evaluation/: evaluation scripts
-utils/:  helper functions
+utils/: helper functions
 
 ### outputs/
 
 Generated results:
 figures/: plots and visualizations
 models/: trained model artefacts
-predictions/: prediction outputs 
+predictions/: prediction outputs
 
 ### docs/
 
@@ -34,36 +35,43 @@ Documentation, metadata, validation files.
 
 Contains configuration files for models and data processing.
 
-### sql/ 
+### sql/
 
 Contains SQL definitions for the database schema and DBRepo views.
 
 ### File naming convention
+
 A consistent naming convention is applied across all files:
 
 #### Input datasets
+
 weather_raw_hohewarte_v1.csv
 weather_processed_monthly_v1.csv
 
 #### Figures
+
 fig_distribution_precipitation_v1.png
 fig_confusion_matrix_rf_v1.png
 fig_model_comparison_v1.png
 
 #### Models
+
 model_logreg_v1.pkl
 model_randomforest_v1.pkl
 
 #### Predictions
+
 predictions_test_v1.csv
 
 #### Scripts
+
 load_data.py
 preprocess_data.py
 train_model.py
 evaluate_model.py
 
 #### Configuration files
+
 config_model.yaml
 config_data.yaml
 
@@ -88,14 +96,14 @@ Both choices remain within QUDT and are more accurate representations of the und
 
 ## Ontologies used
 
-| Ontology | Namespace | Used for |
-|---|---|---|
-| QUDT | `http://qudt.org/vocab/quantitykind/` | All physical weather quantities |
-| W3C OWL-Time | `http://www.w3.org/2006/time#` | Calendar year and month references |
-| W3C WGS84 | `http://www.w3.org/2003/01/geo/wgs84_pos#` | Geodetic coordinates |
-| W3C SOSA/SSN | `http://www.w3.org/ns/sosa/` | Weather station (platform) name |
-| EU NUTS | `http://data.europa.eu/nuts/code` | NUTS region, district, and sub-district codes |
-| Dublin Core Terms | `http://purl.org/dc/terms/` | Surrogate-key identifiers |
+| Ontology          | Namespace                                  | Used for                                      |
+| ----------------- | ------------------------------------------ | --------------------------------------------- |
+| QUDT              | `http://qudt.org/vocab/quantitykind/`      | All physical weather quantities               |
+| W3C OWL-Time      | `http://www.w3.org/2006/time#`             | Calendar year and month references            |
+| W3C WGS84         | `http://www.w3.org/2003/01/geo/wgs84_pos#` | Geodetic coordinates                          |
+| W3C SOSA/SSN      | `http://www.w3.org/ns/sosa/`               | Weather station (platform) name               |
+| EU NUTS           | `http://data.europa.eu/nuts/code`          | NUTS region, district, and sub-district codes |
+| Dublin Core Terms | `http://purl.org/dc/terms/`                | Surrogate-key identifiers                     |
 
 ---
 
@@ -105,7 +113,7 @@ Three tables are defined in `create_schema.sql`:
 
 - `station` — metadata for each measurement station (location, administrative codes, coordinates)
 - `time_dimension` — normalised year/month time reference
-- `weather_measurement` — all monthly meteorological observations, keyed to station and time
+- `weather_measurement_v2` — all monthly meteorological observations, keyed to station and time
 
 ---
 
@@ -117,7 +125,7 @@ All column-to-ontology mappings are documented in `docs/semantic_mapping.csv` us
 table_name,column_name,ontology_uri,ontology_label
 ```
 
-The file covers all 38 columns across the three tables.
+The file covers all 37 columns across the three tables.
 
 ---
 
@@ -134,32 +142,15 @@ The file covers all 38 columns across the three tables.
 
 Semantic mappings are added to DBRepo metadata via the REST API using the notebook at `notebooks/t2_2_semantic_mapping_upload.ipynb`.
 
-
 ## Unit mapping
 
-All numeric attributes in the database schema were mapped to ontology-based
-units using QUDT URIs.
+All numeric attributes in the database schema were mapped to ontology-based units using OM-2 (Ontology of Units of Measure 2) URIs.
 
-QUDT was selected as a practical fallback to the SI Digital Framework because
-it provides stable and widely used URIs for all units needed in this weather
-dataset, including degree Celsius, hectopascal, millimeter, meter per second,
-percent, hour, meter, and dimensionless quantities.
+OM-2 was selected because it is supported by the DBRepo metadata infrastructure and provides stable unit concepts for the units needed in this weather dataset, including degree Celsius, hectopascal, millimetre, metre per second, percent, hour, metre, degree, and dimensionless quantities.
 
-Physical measurement columns were mapped to their corresponding scientific
-units, while count-based columns (such as number of frost days or cloudy days)
-were mapped to `number`. Numeric identifiers and administrative codes were
-mapped to `unitless` because they represent references or codes rather than
-physical measurements.
+Physical measurement columns were mapped to their corresponding scientific units. Count-based columns and numeric identifiers were mapped to `om-2/one`, because they represent dimensionless counts or identifiers rather than physical measurements.
 
-The mappings are stored in `docs/unit_mapping.csv` and validated against the
-live DBRepo schema through the DBRepo Python client.
-
-An attempt was made to integrate the mappings directly into DBRepo metadata
-through the REST API. However, the current DBRepo test instance does not expose
-a stable public endpoint for updating column-level unit metadata, therefore
-the mappings are maintained within the repository as FAIR metadata resources.
-
-
+The mappings are stored in `docs/unit_mapping.csv`, uploaded to DBRepo metadata through the DBRepo Python client, and verified using the raw DBRepo REST table response, where the `unit_uri` field is returned for each annotated column.
 
 ## DBRepo views
 
@@ -195,14 +186,41 @@ Aggregation view that summarizes average, minimum, and maximum monthly precipita
 
 ### DBRepo-compatible view
 
-In addition to the SQL definitions, a DBRepo-compatible view named `weather_measurement_features` was created through the DBRepo Python API. This view exposes the measurement columns from the `weather_measurement` table and can be retrieved through the DBRepo view API.
+In addition to the SQL definitions, a DBRepo-compatible view named `weather_measurement_features` was created through the DBRepo Python API. This view exposes the measurement columns from the `weather_measurement_v2` table and can be retrieved through the DBRepo view API.
 
 The SQL definitions are stored in `sql/create_views.sql`, and the DBRepo view creation is implemented in `notebooks/04_create_dbrepo_views.ipynb`.
 
+## DBRepo-based ML pipeline
+
+The final experiment code retrieves data exclusively from DBRepo via the REST/Python API. It does not read local CSV files during model training or evaluation.
+
+- DBRepo base URL: `https://test.dbrepo.tuwien.ac.at`
+- Database ID: `899bfcba-7fec-40c9-9076-3a3a9372c844`
+- Preferred view: `weather_measurement_features`
+- Base-table fallback: `weather_measurement`, `time_dimension`, `station`
+- Configuration and authentication are loaded from `.env` using:
+  `DBREPO_ENDPOINT`, `DBREPO_USERNAME`, `DBREPO_PASSWORD`,
+  `DBREPO_DATABASE_ID`, `DBREPO_TABLE_WEATHER_MEASUREMENT_ID`,
+  `DBREPO_TABLE_TIME_DIMENSION_ID`, and `DBREPO_TABLE_STATION_ID`.
+
+Run the full experiment with:
+
+```bash
+python -m src.pipeline.run_experiment
+```
+
+The pipeline trains Logistic Regression and Random Forest classifiers and writes these artefacts:
+
+- `outputs/predictions/model_metrics_v1.csv`
+- `outputs/predictions/predictions_test_v1.csv`
+- `outputs/figures/fig_confusion_matrix_logreg_v1.png`
+- `outputs/figures/fig_confusion_matrix_randomforest_v1.png`
+- `outputs/figures/fig_model_comparison_v1.png`
+- `outputs/models/model_logreg_v1.pkl`
+- `outputs/models/model_randomforest_v1.pkl`
 
 ## Licences
 
 Input dataset: CC BY 4.0 (source data.gv.at)
 Source code: MIT License
 Generated outputs: To be assigned in later stages
-
