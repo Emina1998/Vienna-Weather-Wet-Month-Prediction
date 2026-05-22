@@ -1,30 +1,30 @@
 table_name,column_name,ontology_uri,ontology_label
-weather_measurement,measurement_id,http://purl.org/dc/terms/identifier,Measurement identifier
-weather_measurement,station_num,http://purl.org/dc/terms/identifier,Station identifier
-weather_measurement,time_id,http://purl.org/dc/terms/identifier,Time identifier
-weather_measurement,t_mean_c,http://qudt.org/vocab/quantitykind/Temperature,Mean temperature
-weather_measurement,t_max_c,http://qudt.org/vocab/quantitykind/Temperature,Maximum temperature
-weather_measurement,t_min_c,http://qudt.org/vocab/quantitykind/Temperature,Minimum temperature
-weather_measurement,mean_t_max_c,http://qudt.org/vocab/quantitykind/Temperature,Mean daily maximum temperature
-weather_measurement,mean_t_min_c,http://qudt.org/vocab/quantitykind/Temperature,Mean daily minimum temperature
-weather_measurement,p_mean_hpa,http://qudt.org/vocab/quantitykind/Pressure,Mean air pressure
-weather_measurement,p_max_hpa,http://qudt.org/vocab/quantitykind/Pressure,Maximum air pressure
-weather_measurement,p_min_hpa,http://qudt.org/vocab/quantitykind/Pressure,Minimum air pressure
-weather_measurement,precp_sum_mm,http://qudt.org/vocab/quantitykind/LengthOrDepth,Monthly precipitation sum
-weather_measurement,num_precp_01,http://qudt.org/vocab/quantitykind/Count,Number of precipitation days
-weather_measurement,rel_hum_pct,http://qudt.org/vocab/quantitykind/RelativeHumidity,Mean relative humidity
-weather_measurement,rel_hum_max_pct,http://qudt.org/vocab/quantitykind/RelativeHumidity,Maximum relative humidity
-weather_measurement,rel_hum_min_pct,http://qudt.org/vocab/quantitykind/RelativeHumidity,Minimum relative humidity
-weather_measurement,wind_vel_ms,http://qudt.org/vocab/quantitykind/Velocity,Mean wind velocity
-weather_measurement,wind_vel_max_ms,http://qudt.org/vocab/quantitykind/Velocity,Maximum wind velocity
-weather_measurement,num_wind_vel60,http://qudt.org/vocab/quantitykind/Count,Number of high-wind days
-weather_measurement,sun_h,http://qudt.org/vocab/quantitykind/Duration,Sunshine duration
-weather_measurement,num_clear,http://qudt.org/vocab/quantitykind/Count,Number of clear days
-weather_measurement,num_cloud,http://qudt.org/vocab/quantitykind/Count,Number of cloudy days
-weather_measurement,num_frost,http://qudt.org/vocab/quantitykind/Count,Number of frost days
-weather_measurement,num_ice,http://qudt.org/vocab/quantitykind/Count,Number of ice days
-weather_measurement,num_summer,http://qudt.org/vocab/quantitykind/Count,Number of summer days
-weather_measurement,num_heat,http://qudt.org/vocab/quantitykind/Count,Number of heat days
+weather_measurement_v2,measurement_id,http://purl.org/dc/terms/identifier,Measurement identifier
+weather_measurement_v2,station_num,http://purl.org/dc/terms/identifier,Station identifier
+weather_measurement_v2,time_id,http://purl.org/dc/terms/identifier,Time identifier
+weather_measurement_v2,t_mean_c,http://qudt.org/vocab/quantitykind/Temperature,Mean temperature
+weather_measurement_v2,t_max_c,http://qudt.org/vocab/quantitykind/Temperature,Maximum temperature
+weather_measurement_v2,t_min_c,http://qudt.org/vocab/quantitykind/Temperature,Minimum temperature
+weather_measurement_v2,mean_t_max_c,http://qudt.org/vocab/quantitykind/Temperature,Mean daily maximum temperature
+weather_measurement_v2,mean_t_min_c,http://qudt.org/vocab/quantitykind/Temperature,Mean daily minimum temperature
+weather_measurement_v2,p_mean_hpa,http://qudt.org/vocab/quantitykind/Pressure,Mean air pressure
+weather_measurement_v2,p_max_hpa,http://qudt.org/vocab/quantitykind/Pressure,Maximum air pressure
+weather_measurement_v2,p_min_hpa,http://qudt.org/vocab/quantitykind/Pressure,Minimum air pressure
+weather_measurement_v2,precp_sum_mm,http://qudt.org/vocab/quantitykind/LengthOrDepth,Monthly precipitation sum
+weather_measurement_v2,num_precp_01,http://qudt.org/vocab/quantitykind/Count,Number of precipitation days
+weather_measurement_v2,rel_hum_pct,http://qudt.org/vocab/quantitykind/RelativeHumidity,Mean relative humidity
+weather_measurement_v2,rel_hum_max_pct,http://qudt.org/vocab/quantitykind/RelativeHumidity,Maximum relative humidity
+weather_measurement_v2,rel_hum_min_pct,http://qudt.org/vocab/quantitykind/RelativeHumidity,Minimum relative humidity
+weather_measurement_v2,wind_vel_ms,http://qudt.org/vocab/quantitykind/Velocity,Mean wind velocity
+weather_measurement_v2,wind_vel_max_ms,http://qudt.org/vocab/quantitykind/Velocity,Maximum wind velocity
+weather_measurement_v2,num_wind_vel60,http://qudt.org/vocab/quantitykind/Count,Number of high-wind days
+weather_measurement_v2,sun_h,http://qudt.org/vocab/quantitykind/Duration,Sunshine duration
+weather_measurement_v2,num_clear,http://qudt.org/vocab/quantitykind/Count,Number of clear days
+weather_measurement_v2,num_cloud,http://qudt.org/vocab/quantitykind/Count,Number of cloudy days
+weather_measurement_v2,num_frost,http://qudt.org/vocab/quantitykind/Count,Number of frost days
+weather_measurement_v2,num_ice,http://qudt.org/vocab/quantitykind/Count,Number of ice days
+weather_measurement_v2,num_summer,http://qudt.org/vocab/quantitykind/Count,Number of summer days
+weather_measurement_v2,num_heat,http://qudt.org/vocab/quantitykind/Count,Number of heat days
 time_dimension,time_id,http://purl.org/dc/terms/identifier,Time identifier
 time_dimension,ref_year,http://www.w3.org/2006/time#year,Reference year
 time_dimension,ref_month,http://www.w3.org/2006/time#month,Reference month
