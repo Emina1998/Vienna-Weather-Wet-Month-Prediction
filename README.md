@@ -1,6 +1,135 @@
-# FAIR Vienna Wet Month Prediction
+# Vienna Weather Wet-Month Prediction
 
-Machine learning experiment predicting whether a month in Vienna is wet or dry using historical weather data from Hohe Warte station.
+A reproducible, FAIR-compliant machine learning experiment that predicts whether
+a given calendar month in Vienna is a "wet month" (total precipitation ≥ 60 mm)
+using 150 years of historical weather observations from the Hohe Warte station.
+The experiment trains two binary classifiers — Logistic Regression and Random
+Forest — on monthly meteorological data published by Stadt Wien under CC BY 4.0.
+All data is stored and retrieved from DBRepo. The full experiment is reproducible from this repository.
+
+---
+
+## Requirements and installation
+
+**Python version:** 3.11.0
+
+Install dependencies using pip:
+
+```bash
+pip install -r requirements.txt
+```
+
+The `requirements.txt` includes:
+
+- `pandas` — data loading and transformation
+- `numpy` — numerical operations
+- `scikit-learn` — model training and evaluation
+- `matplotlib` — figure generation
+- `joblib` — model serialisation
+- `python-dotenv` — environment variable management
+- `dbrepo==1.13.4` — DBRepo Python REST client
+
+Before running the experiment, copy `.env.example` to `.env` and fill in your
+DBRepo credentials:
+
+```bash
+cp .env.example .env
+```
+---
+
+## Reproducing the experiment
+
+Follow these steps in order to fully reproduce the experiment from scratch.
+
+**Step 1 — Clone the repository**
+
+```bash
+git clone https://github.com/Emina1998/Vienna-Weather-Wet-Month-Prediction.git
+cd Vienna-Weather-Wet-Month-Prediction
+```
+
+**Step 2 — Install dependencies**
+
+```bash
+pip install -r requirements.txt
+```
+
+**Step 3 — Configure DBRepo credentials**
+
+Copy `.env.example` to `.env` and fill in your DBRepo username and password.
+The database and table IDs are already set to the correct values above.
+
+**Step 4 — (Optional) Set up DBRepo from scratch**
+
+If you want to recreate the database and load the data yourself, run the
+following notebooks in order:
+
+1. `notebooks/dbRepo_setup.ipynb` — creates the database and tables in DBRepo
+2. `notebooks/t2_2_semantic_mapping.ipynb` — adds semantic concept mappings
+3. `notebooks/t2_3_unit_mapping.ipynb` — adds unit of measurement mappings
+4. `notebooks/t2_4_create_dbrepo_views.ipynb` — creates the DBRepo view
+5. `notebooks/t2_5_load_data_to_dbrepo.ipynb` — loads the cleaned data into DBRepo
+
+**Step 5 — Run the experiment**
+
+```bash
+python -m src.pipeline.run_experiment
+```
+
+This will load data from DBRepo, train both models, evaluate them on the
+chronological test split (2020 onwards), and write all output artefacts to
+`outputs/`.
+
+**Step 6 — (Optional) Verify DBRepo reimplementation**
+
+To confirm the DBRepo-based pipeline produces identical results to the original
+local-file version:
+
+```bash
+python -m src.pipeline.compare_local_vs_dbrepo --raw-csv data/raw/weather_raw_vienna_hohewarte_v1.csv
+```
+
+---
+
+## Inputs and outputs
+
+### Input dataset
+
+| File | Description | Source |
+|---|---|---|
+| `data/raw/weather_raw_vienna_hohewarte_v1.csv` | Raw monthly weather observations from Hohe Warte station, 1872–2026, 1847 rows, 29 columns | [data.gv.at](https://www.data.gv.at/datasets/69a06550-1ede-4f50-9c36-e7fb5cf6e7e8) |
+| `data/processed/station_v1.csv` | Cleaned station metadata | Derived from raw CSV |
+| `data/processed/time_dimension_v1.csv` | Normalised year/month references | Derived from raw CSV |
+| `data/processed/weather_measurement_v1.csv` | Cleaned measurement table | Derived from raw CSV |
+
+The raw dataset contains monthly measurements of temperature, atmospheric
+pressure, precipitation, relative humidity, wind speed, sunshine duration, and
+counts of special weather days (frost days, ice days, summer days, heat days).
+Two rows with missing pressure values were excluded before loading into DBRepo,
+leaving 1845 usable observations. Structural missing values in humidity, wind,
+and sunshine columns before 1951 are preserved as NULL.
+
+### Output artefacts
+
+| File | Description |
+|---|---|
+| `outputs/models/model_logreg_v1.pkl` | Trained Logistic Regression pipeline (scikit-learn) |
+| `outputs/models/model_randomforest_v1.pkl` | Trained Random Forest pipeline (scikit-learn) |
+| `outputs/predictions/model_metrics_v1.csv` | Accuracy, precision, recall, F1 for both models on the test split |
+| `outputs/predictions/predictions_test_v1.csv` | Row-level predictions on the test set |
+| `outputs/figures/fig_confusion_matrix_logreg_v1.png` | Confusion matrix for Logistic Regression |
+| `outputs/figures/fig_confusion_matrix_randomforest_v1.png` | Confusion matrix for Random Forest |
+| `outputs/figures/fig_model_comparison_v1.png` | Bar chart comparing both models across all metrics |
+
+### Model performance (test split, ref_year ≥ 2020)
+
+| Model | Accuracy | Precision | Recall | F1 |
+|---|---|---|---|---|
+| Logistic Regression | 0.747 | 0.688 | 0.440 | 0.537 |
+| Random Forest | 0.760 | 0.706 | 0.480 | 0.571 |
+
+---
+
 
 ## File organisation
 
@@ -145,26 +274,22 @@ Semantic mappings are added to DBRepo metadata via the REST API using the notebo
 ## Unit mapping
 
 All numeric attributes in the database schema were mapped to ontology-based
-units using QUDT URIs.
+units using OM-2 (Ontology of Units of Measure) URIs.
 
-QUDT was selected as a practical fallback to the SI Digital Framework because
-it provides stable and widely used URIs for all units needed in this weather
-dataset, including degree Celsius, hectopascal, millimeter, meter per second,
-percent, hour, meter, and dimensionless quantities.
+OM-2 was selected instead of the recommended SI Digital Framework because it is
+already registered and supported within the DBRepo metadata registry, making
+direct API integration possible. It provides stable, widely used URIs for all
+units needed in this dataset, including degree Celsius, hectopascal, millimetre,
+metre per second, percent, hour, metre, year, month, and dimensionless quantities.
 
 Physical measurement columns were mapped to their corresponding scientific
 units, while count-based columns (such as number of frost days or cloudy days)
-were mapped to `number`. Numeric identifiers and administrative codes were
-mapped to `unitless` because they represent references or codes rather than
-physical measurements.
+were mapped to `om-2/one` (number). Numeric identifiers and administrative codes
+were also mapped to `om-2/one` (unitless) because they represent references or
+codes rather than physical measurements.
 
-The mappings are stored in `docs/unit_mapping.csv` and validated against the
-live DBRepo schema through the DBRepo Python client.
-
-An attempt was made to integrate the mappings directly into DBRepo metadata
-through the REST API. However, the current DBRepo test instance does not expose
-a stable public endpoint for updating column-level unit metadata, therefore
-the mappings are maintained within the repository as FAIR metadata resources.
+The mappings are stored in `docs/unit_mapping.csv` and were pushed to DBRepo
+column metadata via the REST API using `notebooks/t2_3_unit_mapping.ipynb`.
 
 ## DBRepo views
 
@@ -308,3 +433,21 @@ results — are released under **CC BY 4.0** (`CC-BY-4.0`, Creative Commons
 Attribution 4.0 International). This is consistent with the input data
 licence, ensures outputs remain openly reusable with attribution, and satisfies
 the requirements of the TU Wien Research Data Repository deposit (T3.10).
+
+
+
+## Contributors
+
+Role | Name | Orcid
+Azra Sisic(Person A) | [0009-0006-0701-5821](https://orcid.org/0009-0006-0701-5821) |
+PLACEHOLDER_NAME_B (Person B) | [PLACEHOLDER_ORCID_B](https://orcid.org/) |
+Emina Skrijelj(Person C) | [0009-0002-0794-5341](https://orcid.org/0009-0002-0794-5341) |
+Kerim Halilovic (Person D) | [0009-0001-9615-5191](https://orcid.org/0009-0001-9615-5191) |
+
+---
+
+## Zenodo DOI
+
+*Badge will be added after T3.8 (Zenodo integration).*
+
+---
