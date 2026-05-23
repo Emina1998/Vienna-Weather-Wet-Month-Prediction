@@ -29,7 +29,7 @@
     "@type": "fair4ml:Algorithm",
     "name": "Logistic Regression",
     "library": "scikit-learn",
-    "libraryVersion": "1.x",
+    "libraryVersion": "1.5.1",
     "implementationClass": "sklearn.linear_model.LogisticRegression"
   },
   "fair4ml:hyperparameters": {
@@ -50,7 +50,7 @@
   "fair4ml:trainedOn": {
     "@type": "Dataset",
     "name": "Vienna Weather Wet-Month – DBRepo Training Split (years <= 2016)",
-    "@id": "PLACEHOLDER_TUWRD_MODEL_DEPOSIT_DOI",
+    "@id": "10.70124/wn56q-hvb63",
     "description": "Monthly weather observations from the Hohe Warte station in Vienna, Austria, spanning 1872 to 2016. Source: Stadt Wien / MA 23, published on data.gv.at under CC BY 4.0.",
     "url": "https://www.data.gv.at/datasets/69a06550-1ede-4f50-9c36-e7fb5cf6e7e8",
     "license": "https://creativecommons.org/licenses/by/4.0/"
@@ -117,7 +117,7 @@
   "fair4ml:ethicalConsiderations": "The dataset contains no personal data. No sensitive attributes are used. The model's predictions carry no direct societal risk in the intended research context.",
   "fair4ml:modelArtifact": "outputs/models/model_logreg_v1.pkl",
   "fair4ml:modelCard": "docs/model-card.md",
-  "dateCreated": "2025-05-23",
+  "dateCreated": "2026-05-23",
   "keywords": [
     "weather prediction",
     "wet month classification",
