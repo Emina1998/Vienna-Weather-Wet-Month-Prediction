@@ -282,6 +282,29 @@ The unit URIs are based on `docs/unit_mapping.csv` and the DBRepo unit metadata 
 
 ## Licences
 
-Input dataset: CC BY 4.0 (source data.gv.at)
-Source code: MIT License
-Generated outputs: To be assigned in later stages
+### Input Data
+
+The source dataset (*Wetter seit 1872 — Hohe Warte Wien*) is published by
+Stadt Wien under **CC BY 4.0** (`CC-BY-4.0`, Creative Commons Attribution 4.0
+International). Use of this dataset for research and machine learning purposes
+is explicitly permitted under this licence. Attribution to Stadt Wien —
+data.gv.at is required in any derived work. CC BY 4.0 contains no ShareAlike
+clause, meaning derived works and output data are not required to adopt the
+same licence.
+
+### Software / Code
+
+All code in this repository is released under the **MIT Licence** (`MIT`)
+(see `LICENSE`). MIT was chosen because it is a simple, permissive open-source
+licence that imposes no conditions conflicting with the CC BY 4.0 input data
+licence. It allows free use, modification, and distribution of the software
+for any purpose, which is appropriate for an open academic research project.
+
+### Output / Generated Data
+
+All output artefacts produced by this experiment — including trained models,
+model predictions, evaluation figures, confusion matrices, and classification
+results — are released under **CC BY 4.0** (`CC-BY-4.0`, Creative Commons
+Attribution 4.0 International). This is consistent with the input data
+licence, ensures outputs remain openly reusable with attribution, and satisfies
+the requirements of the TU Wien Research Data Repository deposit (T3.10).
