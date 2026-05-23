@@ -1,0 +1,565 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "cr": "http://mlcommons.org/croissant/",
+    "sc": "https://schema.org/",
+    "dct": "http://purl.org/dc/terms/",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "dataType": "cr:dataType",
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileObject": "cr:fileObject",
+    "recordSet": "cr:recordSet",
+    "sha256": "cr:sha256",
+    "source": "cr:source"
+  },
+  "@type": "sc:Dataset",
+  "conformsTo": "http://mlcommons.org/croissant/1.0",
+  "name": "Historical monthly weather observations from Hohe Warte, Vienna",
+  "alternateName": "Vienna Hohe Warte monthly weather raw dataset",
+  "description": "Original raw input dataset for the FAIR Vienna Wet Month Prediction experiment. It contains 1,847 historical monthly meteorological observations from the Hohe Warte station in Vienna, covering temperature, air pressure, precipitation, humidity, wind, sunshine duration, cloudiness, and weather-day count variables. Decimal values in the CSV may use comma decimal notation and missing values are encoded as empty fields. This metadata describes the original raw input dataset, not the cleaned DBRepo tables, trained models, predictions, or generated outputs.",
+  "identifier": "https://www.data.gv.at/datasets/69a06550-1ede-4f50-9c36-e7fb5cf6e7e8",
+  "url": "https://www.data.gv.at/datasets/69a06550-1ede-4f50-9c36-e7fb5cf6e7e8",
+  "sameAs": "https://www.data.gv.at/datasets/69a06550-1ede-4f50-9c36-e7fb5cf6e7e8",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "creator": {
+    "@type": "sc:Organization",
+    "name": "Stadt Wien"
+  },
+  "publisher": {
+    "@type": "sc:Organization",
+    "name": "data.gv.at"
+  },
+  "keywords": [
+    "weather",
+    "meteorology",
+    "Vienna",
+    "Hohe Warte",
+    "monthly observations",
+    "wet month prediction",
+    "FAIR data",
+    "Croissant"
+  ],
+  "isAccessibleForFree": true,
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "raw_weather_csv",
+      "name": "weather_raw_vienna_hohewarte_v1.csv",
+      "alternateName": "weather_raw_hohewarte_v1.csv",
+      "description": "Repository-local copy of the original raw Hohe Warte monthly weather observations. The CSV is semicolon-separated and uses empty fields for missing values.",
+      "contentUrl": "data/raw/weather_raw_vienna_hohewarte_v1.csv",
+      "encodingFormat": "text/csv",
+      "contentSize": "211328 bytes",
+      "sha256": "4010231bfd1db719b49d0126864cb4d8ef3a214dfabc6adce6da36883ed16fed",
+      "cr:delimiter": ";",
+      "cr:nullValues": [
+        ""
+      ]
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "weather_raw_hohewarte_records",
+      "name": "weather_raw_hohewarte_records",
+      "description": "One record represents one monthly weather observation for a station and reference month. REF_DATE is encoded as YYYYMM in the raw CSV. The raw dataset contains the original 1,847 records; downstream DBRepo loading excludes two records with missing pressure values.",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "weather_raw_hohewarte_records/NUTS",
+          "name": "NUTS",
+          "description": "NUTS region code for Vienna, represented as a text identifier.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "raw_weather_csv"
+            },
+            "extract": {
+              "column": "NUTS"
+            }
+          },
+          "position": 1
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "weather_raw_hohewarte_records/DISTRICT_CODE",
+          "name": "DISTRICT_CODE",
+          "description": "Administrative district code for the observation location.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "raw_weather_csv"
+            },
+            "extract": {
+              "column": "DISTRICT_CODE"
+            }
+          },
+          "position": 2,
+          "cr:unit": "http://www.ontology-of-units-of-measure.org/resource/om-2/one"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "weather_raw_hohewarte_records/SUB_DISTRICT_CODE",
+          "name": "SUB_DISTRICT_CODE",
+          "description": "Administrative sub-district code for the observation location.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "raw_weather_csv"
+            },
+            "extract": {
+              "column": "SUB_DISTRICT_CODE"
+            }
+          },
+          "position": 3,
+          "cr:unit": "http://www.ontology-of-units-of-measure.org/resource/om-2/one"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "weather_raw_hohewarte_records/REF_YEAR",
+          "name": "REF_YEAR",
+          "description": "Reference calendar year of the monthly observation.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "raw_weather_csv"
+            },
+            "extract": {
+              "column": "REF_YEAR"
+            }
+          },
+          "position": 4,
+          "cr:unit": "http://www.ontology-of-units-of-measure.org/resource/om-2/year"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "weather_raw_hohewarte_records/REF_DATE",
+          "name": "REF_DATE",
+          "description": "Reference month encoded as a YYYYMM temporal code in the raw CSV.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "raw_weather_csv"
+            },
+            "extract": {
+              "column": "REF_DATE"
+            }
+          },
+          "position": 5,
+          "cr:unit": "http://www.ontology-of-units-of-measure.org/resource/om-2/month"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "weather_raw_hohewarte_records/T",
+          "name": "T",
+          "description": "Mean monthly air temperature.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "raw_weather_csv"
+            },
+            "extract": {
+              "column": "T"
+            }
+          },
+          "position": 6,
+          "cr:unit": "http://www.ontology-of-units-of-measure.org/resource/om-2/degreeCelsius"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "weather_raw_hohewarte_records/T_MAX",
+          "name": "T_MAX",
+          "description": "Maximum air temperature observed in the month.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "raw_weather_csv"
+            },
+            "extract": {
+              "column": "T_MAX"
+            }
+          },
+          "position": 7,
+          "cr:unit": "http://www.ontology-of-units-of-measure.org/resource/om-2/degreeCelsius"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "weather_raw_hohewarte_records/T_MIN",
+          "name": "T_MIN",
+          "description": "Minimum air temperature observed in the month.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "raw_weather_csv"
+            },
+            "extract": {
+              "column": "T_MIN"
+            }
+          },
+          "position": 8,
+          "cr:unit": "http://www.ontology-of-units-of-measure.org/resource/om-2/degreeCelsius"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "weather_raw_hohewarte_records/MEAN_T_MAX",
+          "name": "MEAN_T_MAX",
+          "description": "Mean daily maximum air temperature in the month.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "raw_weather_csv"
+            },
+            "extract": {
+              "column": "MEAN_T_MAX"
+            }
+          },
+          "position": 9,
+          "cr:unit": "http://www.ontology-of-units-of-measure.org/resource/om-2/degreeCelsius"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "weather_raw_hohewarte_records/MEAN_T_MIN",
+          "name": "MEAN_T_MIN",
+          "description": "Mean daily minimum air temperature in the month.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "raw_weather_csv"
+            },
+            "extract": {
+              "column": "MEAN_T_MIN"
+            }
+          },
+          "position": 10,
+          "cr:unit": "http://www.ontology-of-units-of-measure.org/resource/om-2/degreeCelsius"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "weather_raw_hohewarte_records/NUM_FROST",
+          "name": "NUM_FROST",
+          "description": "Number of frost days in the month.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "raw_weather_csv"
+            },
+            "extract": {
+              "column": "NUM_FROST"
+            }
+          },
+          "position": 11,
+          "cr:unit": "http://www.ontology-of-units-of-measure.org/resource/om-2/one"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "weather_raw_hohewarte_records/NUM_ICE",
+          "name": "NUM_ICE",
+          "description": "Number of ice days in the month.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "raw_weather_csv"
+            },
+            "extract": {
+              "column": "NUM_ICE"
+            }
+          },
+          "position": 12,
+          "cr:unit": "http://www.ontology-of-units-of-measure.org/resource/om-2/one"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "weather_raw_hohewarte_records/NUM_SUMMER",
+          "name": "NUM_SUMMER",
+          "description": "Number of summer days in the month.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "raw_weather_csv"
+            },
+            "extract": {
+              "column": "NUM_SUMMER"
+            }
+          },
+          "position": 13,
+          "cr:unit": "http://www.ontology-of-units-of-measure.org/resource/om-2/one"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "weather_raw_hohewarte_records/NUM_HEAT",
+          "name": "NUM_HEAT",
+          "description": "Number of heat days in the month.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "raw_weather_csv"
+            },
+            "extract": {
+              "column": "NUM_HEAT"
+            }
+          },
+          "position": 14,
+          "cr:unit": "http://www.ontology-of-units-of-measure.org/resource/om-2/one"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "weather_raw_hohewarte_records/P",
+          "name": "P",
+          "description": "Mean monthly air pressure. Two raw records have missing pressure values and are excluded later in the DBRepo loading pipeline, but they remain part of this raw input metadata.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "raw_weather_csv"
+            },
+            "extract": {
+              "column": "P"
+            }
+          },
+          "position": 15,
+          "cr:unit": "http://www.ontology-of-units-of-measure.org/resource/om-2/hectopascal"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "weather_raw_hohewarte_records/P_MAX",
+          "name": "P_MAX",
+          "description": "Maximum monthly air pressure. Two raw records have missing pressure values and are excluded later in the DBRepo loading pipeline, but they remain part of this raw input metadata.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "raw_weather_csv"
+            },
+            "extract": {
+              "column": "P_MAX"
+            }
+          },
+          "position": 16,
+          "cr:unit": "http://www.ontology-of-units-of-measure.org/resource/om-2/hectopascal"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "weather_raw_hohewarte_records/P_MIN",
+          "name": "P_MIN",
+          "description": "Minimum monthly air pressure. Two raw records have missing pressure values and are excluded later in the DBRepo loading pipeline, but they remain part of this raw input metadata.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "raw_weather_csv"
+            },
+            "extract": {
+              "column": "P_MIN"
+            }
+          },
+          "position": 17,
+          "cr:unit": "http://www.ontology-of-units-of-measure.org/resource/om-2/hectopascal"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "weather_raw_hohewarte_records/SUN_H",
+          "name": "SUN_H",
+          "description": "Monthly sunshine duration in hours. Values are structurally missing before 1921 because this measurement was not available historically.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "raw_weather_csv"
+            },
+            "extract": {
+              "column": "SUN_H"
+            }
+          },
+          "position": 18,
+          "cr:unit": "http://www.ontology-of-units-of-measure.org/resource/om-2/hour"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "weather_raw_hohewarte_records/NUM_CLEAR",
+          "name": "NUM_CLEAR",
+          "description": "Number of clear days in the month.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "raw_weather_csv"
+            },
+            "extract": {
+              "column": "NUM_CLEAR"
+            }
+          },
+          "position": 19,
+          "cr:unit": "http://www.ontology-of-units-of-measure.org/resource/om-2/one"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "weather_raw_hohewarte_records/NUM_CLOUD",
+          "name": "NUM_CLOUD",
+          "description": "Number of cloudy days in the month.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "raw_weather_csv"
+            },
+            "extract": {
+              "column": "NUM_CLOUD"
+            }
+          },
+          "position": 20,
+          "cr:unit": "http://www.ontology-of-units-of-measure.org/resource/om-2/one"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "weather_raw_hohewarte_records/REL_HUM",
+          "name": "REL_HUM",
+          "description": "Mean monthly relative humidity.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "raw_weather_csv"
+            },
+            "extract": {
+              "column": "REL_HUM"
+            }
+          },
+          "position": 21,
+          "cr:unit": "http://www.ontology-of-units-of-measure.org/resource/om-2/percent"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "weather_raw_hohewarte_records/REL_HUM_MAX",
+          "name": "REL_HUM_MAX",
+          "description": "Maximum monthly relative humidity. Values are structurally missing before 1951 because this measurement was not available historically.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "raw_weather_csv"
+            },
+            "extract": {
+              "column": "REL_HUM_MAX"
+            }
+          },
+          "position": 22,
+          "cr:unit": "http://www.ontology-of-units-of-measure.org/resource/om-2/percent"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "weather_raw_hohewarte_records/REL_HUM_MIN",
+          "name": "REL_HUM_MIN",
+          "description": "Minimum monthly relative humidity. Values are structurally missing before 1951 because this measurement was not available historically.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "raw_weather_csv"
+            },
+            "extract": {
+              "column": "REL_HUM_MIN"
+            }
+          },
+          "position": 23,
+          "cr:unit": "http://www.ontology-of-units-of-measure.org/resource/om-2/percent"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "weather_raw_hohewarte_records/WIND_VEL",
+          "name": "WIND_VEL",
+          "description": "Mean monthly wind velocity.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "raw_weather_csv"
+            },
+            "extract": {
+              "column": "WIND_VEL"
+            }
+          },
+          "position": 24,
+          "cr:unit": "http://www.ontology-of-units-of-measure.org/resource/om-2/metrePerSecond-Time"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "weather_raw_hohewarte_records/NUM_WIND_VEL60",
+          "name": "NUM_WIND_VEL60",
+          "description": "Number of days in the month with wind velocity at or above the high-wind threshold. Values are structurally missing before 1951 because this measurement was not available historically.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "raw_weather_csv"
+            },
+            "extract": {
+              "column": "NUM_WIND_VEL60"
+            }
+          },
+          "position": 25,
+          "cr:unit": "http://www.ontology-of-units-of-measure.org/resource/om-2/one"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "weather_raw_hohewarte_records/WIND_VEL_MAX",
+          "name": "WIND_VEL_MAX",
+          "description": "Maximum monthly wind velocity. Values are structurally missing before 1951 because this measurement was not available historically.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "raw_weather_csv"
+            },
+            "extract": {
+              "column": "WIND_VEL_MAX"
+            }
+          },
+          "position": 26,
+          "cr:unit": "http://www.ontology-of-units-of-measure.org/resource/om-2/metrePerSecond-Time"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "weather_raw_hohewarte_records/PRECP_SUM",
+          "name": "PRECP_SUM",
+          "description": "Monthly precipitation sum.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "raw_weather_csv"
+            },
+            "extract": {
+              "column": "PRECP_SUM"
+            }
+          },
+          "position": 27,
+          "cr:unit": "http://www.ontology-of-units-of-measure.org/resource/om-2/millimetre"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "weather_raw_hohewarte_records/NUM_PRECP_01",
+          "name": "NUM_PRECP_01",
+          "description": "Number of days in the month with measurable precipitation.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "raw_weather_csv"
+            },
+            "extract": {
+              "column": "NUM_PRECP_01"
+            }
+          },
+          "position": 28,
+          "cr:unit": "http://www.ontology-of-units-of-measure.org/resource/om-2/one"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "weather_raw_hohewarte_records/STAT_NUM",
+          "name": "STAT_NUM",
+          "description": "Weather station number. The raw dataset contains station numbers 5901 and 5904, reflecting a historical station renumbering.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "raw_weather_csv"
+            },
+            "extract": {
+              "column": "STAT_NUM"
+            }
+          },
+          "position": 29,
+          "cr:unit": "http://www.ontology-of-units-of-measure.org/resource/om-2/one"
+        }
+      ]
+    }
+  ]
+}

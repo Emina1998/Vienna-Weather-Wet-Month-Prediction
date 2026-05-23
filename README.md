@@ -274,6 +274,12 @@ python -m src.pipeline.compare_local_vs_dbrepo --raw-csv data/raw/weather_raw_vi
 
 This comparison script is used only for verification. It applies the same documented cleaning rule to the local raw CSV and confirms that the DBRepo API version produces the same cleaned dataset: 1845 observations, identical target labels, and equivalent feature values.
 
+## Croissant metadata
+
+Croissant JSON-LD metadata for the raw input weather dataset is stored at `docs/croissant/weather_raw_hohewarte_croissant.json`. The record describes the raw CSV field names, data types, OM-2 unit URIs, source and distribution information, and licence.
+
+The unit URIs are based on `docs/unit_mapping.csv` and the DBRepo unit metadata from T2.3. The source dataset is published by Stadt Wien via data.gv.at and is licensed under CC BY 4.0.
+
 ## Licences
 
 Input dataset: CC BY 4.0 (source data.gv.at)
