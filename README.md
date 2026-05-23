@@ -113,7 +113,7 @@ Three tables are defined in `create_schema.sql`:
 
 - `station` — metadata for each measurement station (location, administrative codes, coordinates)
 - `time_dimension` — normalised year/month time reference
-- `weather_measurement_v2` — all monthly meteorological observations, keyed to station and time
+- `weather_measurement` — all monthly meteorological observations, keyed to station and time
 
 ---
 
@@ -125,7 +125,7 @@ All column-to-ontology mappings are documented in `docs/semantic_mapping.csv` us
 table_name,column_name,ontology_uri,ontology_label
 ```
 
-The file covers all 37 columns across the three tables.
+The file covers all 38 columns across the three tables.
 
 ---
 
@@ -144,13 +144,27 @@ Semantic mappings are added to DBRepo metadata via the REST API using the notebo
 
 ## Unit mapping
 
-All numeric attributes in the database schema were mapped to ontology-based units using OM-2 (Ontology of Units of Measure 2) URIs.
+All numeric attributes in the database schema were mapped to ontology-based
+units using QUDT URIs.
 
-OM-2 was selected because it is supported by the DBRepo metadata infrastructure and provides stable unit concepts for the units needed in this weather dataset, including degree Celsius, hectopascal, millimetre, metre per second, percent, hour, metre, degree, and dimensionless quantities.
+QUDT was selected as a practical fallback to the SI Digital Framework because
+it provides stable and widely used URIs for all units needed in this weather
+dataset, including degree Celsius, hectopascal, millimeter, meter per second,
+percent, hour, meter, and dimensionless quantities.
 
-Physical measurement columns were mapped to their corresponding scientific units. Count-based columns and numeric identifiers were mapped to `om-2/one`, because they represent dimensionless counts or identifiers rather than physical measurements.
+Physical measurement columns were mapped to their corresponding scientific
+units, while count-based columns (such as number of frost days or cloudy days)
+were mapped to `number`. Numeric identifiers and administrative codes were
+mapped to `unitless` because they represent references or codes rather than
+physical measurements.
 
-The mappings are stored in `docs/unit_mapping.csv`, uploaded to DBRepo metadata through the DBRepo Python client, and verified using the raw DBRepo REST table response, where the `unit_uri` field is returned for each annotated column.
+The mappings are stored in `docs/unit_mapping.csv` and validated against the
+live DBRepo schema through the DBRepo Python client.
+
+An attempt was made to integrate the mappings directly into DBRepo metadata
+through the REST API. However, the current DBRepo test instance does not expose
+a stable public endpoint for updating column-level unit metadata, therefore
+the mappings are maintained within the repository as FAIR metadata resources.
 
 ## DBRepo views
 
@@ -158,7 +172,7 @@ The experiment defines several SQL views to expose query-ready data for the mach
 
 ### `weather_features_all`
 
-Main ML-ready feature view. It joins monthly weather measurements with the time dimension and station metadata. It contains all weather input features, temporal variables, station information, and the derived binary target variable `wet_month_label`.
+Main ML-ready feature view. It joins monthly weather measurements from `weather_measurement_v2` with the time dimension and station metadata. It contains all weather input features, temporal variables, station information, and the derived binary target variable `wet_month_label`.
 
 The target variable is defined as:
 
@@ -186,30 +200,63 @@ Aggregation view that summarizes average, minimum, and maximum monthly precipita
 
 ### DBRepo-compatible view
 
-In addition to the SQL definitions, a DBRepo-compatible view named `weather_measurement_features` was created through the DBRepo Python API. This view exposes the measurement columns from the `weather_measurement_v2` table and can be retrieved through the DBRepo view API.
+In addition to the SQL definitions, a DBRepo-compatible view named `weather_measurement_v2_features` was created through the DBRepo Python API. This view exposes the measurement columns from the corrected `weather_measurement_v2` table and can be retrieved through the DBRepo view API.
 
-The SQL definitions are stored in `sql/create_views.sql`, and the DBRepo view creation is implemented in `notebooks/04_create_dbrepo_views.ipynb`.
+The DBRepo-compatible view contains measurement-table columns only. Therefore, the final ML pipeline first attempts to load this view and then falls back to loading the three DBRepo base tables (`weather_measurement_v2`, `time_dimension`, `station`) and joining them locally in pandas when temporal and station metadata are required.
 
-## DBRepo-based ML pipeline
+The SQL definitions are stored in `sql/create_views.sql`, and the DBRepo view creation is implemented in `notebooks/t2_4_create_dbrepo_views.ipynb`.
+
+## DBRepo data loading
+
+The real input data is loaded into DBRepo using the notebook `notebooks/t2_5_load_data_to_dbrepo.ipynb`.
+
+The normalized DBRepo schema consists of:
+
+- `station` — station metadata for Hohe Warte, including the two historical station numbers
+- `time_dimension` — normalized year/month references
+- `weather_measurement_v2` — monthly meteorological measurements linked to station and time
+
+The loaded DBRepo dataset contains:
+
+- `weather_measurement_v2`: 1845 rows
+- `time_dimension`: 1845 rows
+- `station`: 2 rows
+
+Two source records were excluded before loading because all pressure fields (`p_mean_hpa`, `p_max_hpa`, `p_min_hpa`) were missing. This removes 2 of the original 1847 rows and avoids replacing missing pressure values with artificial zeros. Structural missing values in historical humidity, wind, and sunshine columns are preserved as `NULL`.
+
+The DBRepo-compatible view `weather_measurement_v2_features` returns 1845 rows, matching the loaded measurement table.
+
+## DBRepo API reimplementation
 
 The final experiment code retrieves data exclusively from DBRepo via the REST/Python API. It does not read local CSV files during model training or evaluation.
 
 - DBRepo base URL: `https://test.dbrepo.tuwien.ac.at`
-- Database ID: `899bfcba-7fec-40c9-9076-3a3a9372c844`
-- Preferred view: `weather_measurement_features`
-- Base-table fallback: `weather_measurement`, `time_dimension`, `station`
-- Configuration and authentication are loaded from `.env` using:
-  `DBREPO_ENDPOINT`, `DBREPO_USERNAME`, `DBREPO_PASSWORD`,
-  `DBREPO_DATABASE_ID`, `DBREPO_TABLE_WEATHER_MEASUREMENT_ID`,
-  `DBREPO_TABLE_TIME_DIMENSION_ID`, and `DBREPO_TABLE_STATION_ID`.
+- Database ID: `a181cad5-4bdb-48b2-937e-3e75293f6a7b`
+- Preferred DBRepo view: `weather_measurement_v2_features`
+- Base-table fallback: `weather_measurement_v2`, `time_dimension`, `station`
+- Authentication method: DBRepo username/password loaded from `.env`
 
-Run the full experiment with:
+The following environment variables are required:
+
+```env
+DBREPO_ENDPOINT=https://test.dbrepo.tuwien.ac.at
+DBREPO_USERNAME=<your-username>
+DBREPO_PASSWORD=<your-password>
+DBREPO_DATABASE_ID=a181cad5-4bdb-48b2-937e-3e75293f6a7b
+DBREPO_TABLE_WEATHER_MEASUREMENT_ID=3674fea3-a7be-4dfe-8356-bc692bd1ff6c
+DBREPO_TABLE_TIME_DIMENSION_ID=fa248a2c-bfb6-4d8e-a89b-2dbd19ab8cde
+DBREPO_TABLE_STATION_ID=ab02386c-e27c-4c1f-a27d-93034ce3fa79
+```
+
+The pipeline first attempts to load the DBRepo view `weather_measurement_v2_features`. Since this DBRepo-compatible view contains only measurement-table columns, the loader falls back to retrieving the three DBRepo base tables and joins them locally in pandas. No local CSV files are used in the final experiment pipeline.
+
+Run the full DBRepo-based experiment with:
 
 ```bash
 python -m src.pipeline.run_experiment
 ```
 
-The pipeline trains Logistic Regression and Random Forest classifiers and writes these artefacts:
+The pipeline trains Logistic Regression and Random Forest classifiers using a chronological split and writes these artefacts:
 
 - `outputs/predictions/model_metrics_v1.csv`
 - `outputs/predictions/predictions_test_v1.csv`
@@ -218,6 +265,14 @@ The pipeline trains Logistic Regression and Random Forest classifiers and writes
 - `outputs/figures/fig_model_comparison_v1.png`
 - `outputs/models/model_logreg_v1.pkl`
 - `outputs/models/model_randomforest_v1.pkl`
+
+The DBRepo API reimplementation can be verified against the original local-file preprocessing pipeline with:
+
+```bash
+python -m src.pipeline.compare_local_vs_dbrepo --raw-csv data/raw/weather_raw_vienna_hohewarte_v1.csv
+```
+
+This comparison script is used only for verification. It applies the same documented cleaning rule to the local raw CSV and confirms that the DBRepo API version produces the same cleaned dataset: 1845 observations, identical target labels, and equivalent feature values.
 
 ## Licences
 

@@ -1,4 +1,3 @@
-Monatliche Wetterdaten der Messstation Hohe Warte zu Lufttemperatur, Luftdruck, Bewoelkung, Windgeschwindigkeit und Niederschlag seit April 1872 - Wien | Monthly data from the weather station Hohe Warte on air temperature, air pressure, cloudiness, wind speed and precipitation since April 1872 - Vienna
 NUTS;DISTRICT_CODE;SUB_DISTRICT_CODE;REF_YEAR;REF_DATE;T;T_MAX;T_MIN;MEAN_T_MAX;MEAN_T_MIN;NUM_FROST;NUM_ICE;NUM_SUMMER;NUM_HEAT;P;P_MAX;P_MIN;SUN_H;NUM_CLEAR;NUM_CLOUD;REL_HUM;REL_HUM_MAX;REL_HUM_MIN;WIND_VEL;NUM_WIND_VEL60;WIND_VEL_MAX;PRECP_SUM;NUM_PRECP_01;STAT_NUM
 AT13;91900;91905;1872;187205;17,0;30,6;7,9;23,1;11,8;0;0;13;2;990,9;1003,2;981,2;;8;9;64;;;7,2;;;50;8;5901
 AT13;91900;91905;1872;187206;17,2;28,3;10,0;22,6;12,9;0;0;7;0;990,0;999,7;981,3;;1;7;66;;;10,8;;;73;11;5901
