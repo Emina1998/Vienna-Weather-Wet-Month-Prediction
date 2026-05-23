@@ -1,0 +1,132 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "fair4ml": "https://fair4ml.com/terms/",
+    "codemeta": "https://codemeta.github.io/terms/"
+  },
+  "@type": "SoftwareApplication",
+  "@id": "https://github.com/Emina1998/Vienna-Weather-Wet-Month-Prediction/blob/main/outputs/models/model_randomforest_v1.pkl",
+
+  "name": "Random Forest – Vienna Wet-Month Classifier (v1)",
+  "description": "A binary classification model that predicts whether a given calendar month in Vienna (Hohe Warte station) is a 'wet month', defined as total monthly precipitation >= 60 mm. The model is a scikit-learn Pipeline consisting of a median imputer and a Random Forest classifier trained on monthly weather observations from 1872 to 2016.",
+  "version": "1.0.0",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+
+  "author": [
+  {
+    "@type": "Person",
+    "name": "Emina Skrijelj",
+    "@id": "https://orcid.org/0009-0002-0794-5341"
+  }
+],
+
+  "programmingLanguage": {
+    "@type": "ComputerLanguage",
+    "name": "Python",
+    "version": "3.10"
+  },
+
+  "runtimePlatform": "scikit-learn 1.x",
+
+  "codeRepository": "https://github.com/Emina1998/Vienna-Weather-Wet-Month-Prediction",
+
+  "fair4ml:mlTask": "Binary Classification",
+
+  "fair4ml:algorithm": {
+    "@type": "fair4ml:Algorithm",
+    "name": "Random Forest",
+    "library": "scikit-learn",
+    "libraryVersion": "1.x",
+    "implementationClass": "sklearn.ensemble.RandomForestClassifier"
+  },
+
+  "fair4ml:hyperparameters": {
+    "pipeline_steps": ["median_imputer", "random_forest_classifier"],
+    "imputer__strategy": "median",
+    "classifier__n_estimators": 200,
+    "classifier__random_state": 42,
+    "classifier__n_jobs": -1,
+    "classifier__criterion": "gini",
+    "classifier__max_depth": null,
+    "classifier__min_samples_split": 2,
+    "classifier__min_samples_leaf": 1,
+    "classifier__max_features": "sqrt",
+    "classifier__bootstrap": true
+  },
+
+  "fair4ml:trainedOn": {
+    "@type": "Dataset",
+    "name": "Vienna Weather Wet-Month – DBRepo Training Split (years <= 2016)",
+    "@id": "PLACEHOLDER_TUWRD_MODEL_DEPOSIT_DOI",
+    "description": "Monthly weather observations from the Hohe Warte station in Vienna, Austria, spanning 1872 to 2016. Source: Stadt Wien / MA 23, published on data.gv.at under CC BY 4.0.",
+    "url": "https://www.data.gv.at/datasets/69a06550-1ede-4f50-9c36-e7fb5cf6e7e8",
+    "license": "https://creativecommons.org/licenses/by/4.0/"
+  },
+
+  "fair4ml:splitStrategy": {
+    "type": "chronological",
+    "train": "ref_year <= 2016",
+    "validation": "2017 <= ref_year <= 2019",
+    "test": "ref_year >= 2020"
+  },
+
+  "fair4ml:featureColumns": [
+    "t_mean_c", "t_max_c", "t_min_c", "mean_t_max_c", "mean_t_min_c",
+    "p_mean_hpa", "p_max_hpa", "p_min_hpa",
+    "num_precp_01",
+    "rel_hum_pct", "rel_hum_max_pct", "rel_hum_min_pct",
+    "wind_vel_ms", "wind_vel_max_ms", "num_wind_vel60",
+    "sun_h", "num_clear", "num_cloud",
+    "num_frost", "num_ice", "num_summer", "num_heat",
+    "ref_year", "ref_month",
+    "latitude_deg", "longitude_deg", "altitude_m"
+  ],
+  "fair4ml:featureCount": 27,
+
+  "fair4ml:targetColumn": "wet_month_label",
+  "fair4ml:targetDefinition": "Binary label: 1 if monthly precipitation (precp_sum_mm) >= 60 mm, else 0.",
+  "fair4ml:targetClasses": {
+    "0": "dry month (precp_sum_mm < 60 mm)",
+    "1": "wet month (precp_sum_mm >= 60 mm)"
+  },
+
+  "fair4ml:missingValueStrategy": "Median imputation applied to all numeric features before training.",
+
+  "fair4ml:evaluationMetrics": {
+    "dataset": "test split (ref_year >= 2020)",
+    "accuracy": 0.7600,
+    "precision": 0.7059,
+    "recall": 0.4800,
+    "f1_score": 0.5714,
+    "metric_notes": "Metrics computed on the chronological test split. Precision, recall, and F1 are reported for the positive class (wet month = 1)."
+  },
+
+  "fair4ml:intendedUse": "This model is intended for research and educational purposes, specifically to demonstrate a reproducible FAIR ML experiment using historical weather data from the Vienna Hohe Warte station. It may be used to explore the predictability of wet months from meteorological features in a temperate Central European climate.",
+
+  "fair4ml:outOfScopeUses": "This model is not intended for operational weather forecasting or climate-sensitive decision making. It should not be applied to stations other than Hohe Warte without retraining and validation. It is not suitable for predicting extreme precipitation events or for use in flood risk assessment.",
+
+  "fair4ml:limitations": [
+    "The model is trained exclusively on data from a single station (Hohe Warte, Vienna) and may not generalise to other locations or climates.",
+    "Historical records before 1951 have structural missing values for several features (e.g. REL_HUM_MAX, WIND_VEL_MAX, SUN_H), which are imputed with medians; this may introduce bias for the early historical period.",
+    "The chronological train/test split means the model is evaluated only on recent years (2020 onwards), which may not represent all climate conditions in the full dataset.",
+    "Class imbalance between wet and dry months is not explicitly addressed, which may contribute to the relatively low recall of 0.48.",
+    "Random Forest models are not easily interpretable; feature importance values are available but do not provide causal explanations."
+  ],
+
+  "fair4ml:ethicalConsiderations": "The dataset contains no personal data. No sensitive attributes are used. The model's predictions carry no direct societal risk in the intended research context.",
+
+  "fair4ml:modelArtifact": "outputs/models/model_randomforest_v1.pkl",
+  "fair4ml:modelCard": "docs/model-card.md",
+
+  "dateCreated": "2025-05-23",
+  "keywords": [
+    "weather prediction",
+    "wet month classification",
+    "random forest",
+    "Vienna",
+    "Hohe Warte",
+    "FAIR ML",
+    "climate",
+    "binary classification"
+  ]
+}
