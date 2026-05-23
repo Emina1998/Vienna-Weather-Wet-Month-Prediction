@@ -3,10 +3,11 @@ from __future__ import annotations
 import math
 import os
 import warnings
+from getpass import getpass
 from typing import Any, Callable
 
 import pandas as pd
-from dotenv import load_dotenv
+from dotenv import find_dotenv, load_dotenv
 
 DEFAULT_PAGE_SIZE = 100_000
 FEATURE_VIEW_NAME = "weather_measurement_v2_features"
@@ -67,8 +68,20 @@ def load_data() -> pd.DataFrame:
 
 
 def _load_config() -> dict[str, str]:
-    load_dotenv()
-    missing = [name for name in REQUIRED_ENV_VARS if not os.getenv(name)]
+    load_dotenv(find_dotenv(), override=True)
+
+    endpoint = os.getenv("DBREPO_ENDPOINT", "https://test.dbrepo.tuwien.ac.at")
+    database_id = os.getenv("DBREPO_DATABASE_ID")
+    username = os.getenv("DBREPO_USERNAME") or input("DBRepo username: ")
+    password = os.getenv("DBREPO_PASSWORD") or getpass("DBRepo password: ")
+
+    values = {
+        "DBREPO_ENDPOINT": endpoint,
+        "DBREPO_USERNAME": username,
+        "DBREPO_PASSWORD": password,
+        "DBREPO_DATABASE_ID": database_id,
+    }
+    missing = [name for name, value in values.items() if not value]
     if missing:
         raise RuntimeError(
             "Missing DBRepo environment variable(s): "
@@ -76,7 +89,7 @@ def _load_config() -> dict[str, str]:
             "experiment."
         )
 
-    return {name: os.environ[name] for name in REQUIRED_ENV_VARS}
+    return {name: str(values[name]) for name in REQUIRED_ENV_VARS}
 
 
 def _create_client(endpoint: str, username: str, password: str) -> Any:

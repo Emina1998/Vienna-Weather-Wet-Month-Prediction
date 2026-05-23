@@ -1,0 +1,7 @@
+pandas
+numpy
+scikit-learn
+matplotlib
+joblib
+python-dotenv
+dbrepo==1.13.4
