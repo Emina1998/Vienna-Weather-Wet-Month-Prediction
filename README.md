@@ -440,7 +440,7 @@ the requirements of the TU Wien Research Data Repository deposit (T3.10).
 
 Role | Name | Orcid
 Azra Sisic(Person A) | [0009-0006-0701-5821](https://orcid.org/0009-0006-0701-5821) |
-PLACEHOLDER_NAME_B (Person B) | [PLACEHOLDER_ORCID_B](https://orcid.org/) |
+Raja Shahroz (Person B) | [0009-0003-5130-1049](https://orcid.org/0009-0003-5130-1049) |
 Emina Skrijelj(Person C) | [0009-0002-0794-5341](https://orcid.org/0009-0002-0794-5341) |
 Kerim Halilovic (Person D) | [0009-0001-9615-5191](https://orcid.org/0009-0001-9615-5191) |
 
