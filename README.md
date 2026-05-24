@@ -1,5 +1,7 @@
 # Vienna Weather Wet-Month Prediction
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20364604.svg)](https://doi.org/10.5281/zenodo.20364604)
+
 A reproducible, FAIR-compliant machine learning experiment that predicts whether
 a given calendar month in Vienna is a "wet month" (total precipitation ≥ 60 mm)
 using 150 years of historical weather observations from the Hohe Warte station.
@@ -35,6 +37,7 @@ DBRepo credentials:
 ```bash
 cp .env.example .env
 ```
+
 ---
 
 ## Reproducing the experiment
@@ -95,12 +98,12 @@ python -m src.pipeline.compare_local_vs_dbrepo --raw-csv data/raw/weather_raw_vi
 
 ### Input dataset
 
-| File | Description | Source |
-|---|---|---|
+| File                                           | Description                                                                                | Source                                                                             |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------- |
 | `data/raw/weather_raw_vienna_hohewarte_v1.csv` | Raw monthly weather observations from Hohe Warte station, 1872–2026, 1847 rows, 29 columns | [data.gv.at](https://www.data.gv.at/datasets/69a06550-1ede-4f50-9c36-e7fb5cf6e7e8) |
-| `data/processed/station_v1.csv` | Cleaned station metadata | Derived from raw CSV |
-| `data/processed/time_dimension_v1.csv` | Normalised year/month references | Derived from raw CSV |
-| `data/processed/weather_measurement_v1.csv` | Cleaned measurement table | Derived from raw CSV |
+| `data/processed/station_v1.csv`                | Cleaned station metadata                                                                   | Derived from raw CSV                                                               |
+| `data/processed/time_dimension_v1.csv`         | Normalised year/month references                                                           | Derived from raw CSV                                                               |
+| `data/processed/weather_measurement_v1.csv`    | Cleaned measurement table                                                                  | Derived from raw CSV                                                               |
 
 The raw dataset contains monthly measurements of temperature, atmospheric
 pressure, precipitation, relative humidity, wind speed, sunshine duration, and
@@ -111,25 +114,24 @@ and sunshine columns before 1951 are preserved as NULL.
 
 ### Output artefacts
 
-| File | Description |
-|---|---|
-| `outputs/models/model_logreg_v1.pkl` | Trained Logistic Regression pipeline (scikit-learn) |
-| `outputs/models/model_randomforest_v1.pkl` | Trained Random Forest pipeline (scikit-learn) |
-| `outputs/predictions/model_metrics_v1.csv` | Accuracy, precision, recall, F1 for both models on the test split |
-| `outputs/predictions/predictions_test_v1.csv` | Row-level predictions on the test set |
-| `outputs/figures/fig_confusion_matrix_logreg_v1.png` | Confusion matrix for Logistic Regression |
-| `outputs/figures/fig_confusion_matrix_randomforest_v1.png` | Confusion matrix for Random Forest |
-| `outputs/figures/fig_model_comparison_v1.png` | Bar chart comparing both models across all metrics |
+| File                                                       | Description                                                       |
+| ---------------------------------------------------------- | ----------------------------------------------------------------- |
+| `outputs/models/model_logreg_v1.pkl`                       | Trained Logistic Regression pipeline (scikit-learn)               |
+| `outputs/models/model_randomforest_v1.pkl`                 | Trained Random Forest pipeline (scikit-learn)                     |
+| `outputs/predictions/model_metrics_v1.csv`                 | Accuracy, precision, recall, F1 for both models on the test split |
+| `outputs/predictions/predictions_test_v1.csv`              | Row-level predictions on the test set                             |
+| `outputs/figures/fig_confusion_matrix_logreg_v1.png`       | Confusion matrix for Logistic Regression                          |
+| `outputs/figures/fig_confusion_matrix_randomforest_v1.png` | Confusion matrix for Random Forest                                |
+| `outputs/figures/fig_model_comparison_v1.png`              | Bar chart comparing both models across all metrics                |
 
 ### Model performance (test split, ref_year ≥ 2020)
 
-| Model | Accuracy | Precision | Recall | F1 |
-|---|---|---|---|---|
-| Logistic Regression | 0.747 | 0.688 | 0.440 | 0.537 |
-| Random Forest | 0.760 | 0.706 | 0.480 | 0.571 |
+| Model               | Accuracy | Precision | Recall | F1    |
+| ------------------- | -------- | --------- | ------ | ----- |
+| Logistic Regression | 0.747    | 0.688     | 0.440  | 0.537 |
+| Random Forest       | 0.760    | 0.706     | 0.480  | 0.571 |
 
 ---
-
 
 ## File organisation
 
@@ -409,7 +411,7 @@ The unit URIs are based on `docs/unit_mapping.csv` and the DBRepo unit metadata 
 
 ### Input Data
 
-The source dataset (*Wetter seit 1872 — Hohe Warte Wien*) is published by
+The source dataset (_Wetter seit 1872 — Hohe Warte Wien_) is published by
 Stadt Wien under **CC BY 4.0** (`CC-BY-4.0`, Creative Commons Attribution 4.0
 International). Use of this dataset for research and machine learning purposes
 is explicitly permitted under this licence. Attribution to Stadt Wien —
@@ -434,8 +436,6 @@ Attribution 4.0 International). This is consistent with the input data
 licence, ensures outputs remain openly reusable with attribution, and satisfies
 the requirements of the TU Wien Research Data Repository deposit (T3.10).
 
-
-
 ## Contributors
 
 Role | Name | Orcid
@@ -443,11 +443,5 @@ Azra Sisic(Person A) | [0009-0006-0701-5821](https://orcid.org/0009-0006-0701-58
 Raja Shahroz (Person B) | [0009-0003-5130-1049](https://orcid.org/0009-0003-5130-1049) |
 Emina Skrijelj(Person C) | [0009-0002-0794-5341](https://orcid.org/0009-0002-0794-5341) |
 Kerim Halilovic (Person D) | [0009-0001-9615-5191](https://orcid.org/0009-0001-9615-5191) |
-
----
-
-## Zenodo DOI
-
-*Badge will be added after T3.8 (Zenodo integration).*
 
 ---

@@ -1,0 +1,42 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite it using the metadata from this file."
+title: "FAIR Vienna Wet Month Prediction"
+type: software
+
+authors:
+  - family-names: "Halilovic"
+    given-names: "Kerim"
+    orcid: "https://orcid.org/0009-0001-9615-5191"
+  - family-names: "Skrijelj"
+    given-names: "Emina"
+    orcid: "https://orcid.org/0009-0002-0794-5341"
+  - family-names: "Sisic"
+    given-names: "Azra"
+    orcid: "https://orcid.org/0009-0006-0701-5821"
+  - family-names: "Shahroz"
+    given-names: "Raja"
+    orcid: "https://orcid.org/0009-0003-5130-1049"
+
+repository-code: "https://github.com/Emina1998/Vienna-Weather-Wet-Month-Prediction"
+url: "https://github.com/Emina1998/Vienna-Weather-Wet-Month-Prediction"
+doi: "10.5281/zenodo.20364604"
+
+abstract: "Machine learning experiment predicting wet months in Vienna using historical monthly weather observations from the Hohe Warte station. The repository contains DBRepo-based data loading, semantic and unit metadata mappings, SQL view definitions, machine learning training and evaluation code, and FAIR documentation artefacts."
+
+keywords:
+  - weather
+  - Vienna
+  - Hohe Warte
+  - wet month prediction
+  - machine learning
+  - FAIR data
+  - DBRepo
+
+license: MIT
+version: "v3.0-wp3"
+date-released: "2026-05-24"
+
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.20364604"
+    description: "Zenodo DOI for the GitHub release."
