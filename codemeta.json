@@ -14,7 +14,7 @@
     "version": "3.11",
     "url": "https://www.python.org/"
   },
-  "runtimePlatform": "CPython 3.10",
+  "runtimePlatform": "CPython 3.11",
   "operatingSystem": "Linux, macOS, Windows",
   "readme": "https://github.com/Emina1998/Vienna-Weather-Wet-Month-Prediction/blob/main/README.md",
   "author": [
