@@ -129,8 +129,8 @@ Licence text: https://creativecommons.org/licenses/by/4.0/
 
 ## References
 
-- FAIR4ML metadata (Logistic Regression): `docs/fair4ml/fair4ml_logreg_v1.json`
-- FAIR4ML metadata (Random Forest): `docs/fair4ml/fair4ml_randomforest_v1.json`
+- FAIR4ML metadata (Logistic Regression): `docs/fair4ml/fair4ml_logreg.json`
+- FAIR4ML metadata (Random Forest): `docs/fair4ml/fair4ml_randomforest.json`
 - RO-Crate: `ro-crate-metadata.json` *(to be added — T3.1)*
 - Source dataset: https://www.data.gv.at/datasets/69a06550-1ede-4f50-9c36-e7fb5cf6e7e8
 - Code repository: https://github.com/Emina1998/Vienna-Weather-Wet-Month-Prediction

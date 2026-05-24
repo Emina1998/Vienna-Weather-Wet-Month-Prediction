@@ -405,6 +405,23 @@ Croissant JSON-LD metadata for the raw input weather dataset is stored at `docs/
 
 The unit URIs are based on `docs/unit_mapping.csv` and the DBRepo unit metadata from T2.3. The source dataset is published by Stadt Wien via data.gv.at and is licensed under CC BY 4.0.
 
+## Metadata files
+
+The repository currently includes the following WP3 metadata and documentation files:
+
+| File | Purpose |
+|---|---|
+| `codemeta.json` | CodeMeta 2.0 metadata for the software repository |
+| `docs/croissant/weather_raw_hohewarte_croissant.json` | Croissant JSON-LD metadata for the raw input dataset |
+| `docs/croissant/validation_notes.md` | Croissant syntax and validation notes |
+| `docs/fair4ml/fair4ml_logreg.json` | FAIR4ML metadata for the Logistic Regression model |
+| `docs/fair4ml/fair4ml_randomforest.json` | FAIR4ML metadata for the Random Forest model |
+| `docs/licensing.md` | Licence summary for input data, software, models, and generated outputs |
+| `docs/model-card.md` | Model card covering both trained classifiers |
+| `docs/validation/` | Validation-output directory |
+
+`ro-crate-metadata.json` and `CITATION.cff` are pending until RO-Crate validation, Zenodo DOI minting, and TUWRD deposit metadata are completed.
+
 ## Licences
 
 ### Input Data
@@ -438,11 +455,12 @@ the requirements of the TU Wien Research Data Repository deposit (T3.10).
 
 ## Contributors
 
-Role | Name | Orcid
-Azra Sisic(Person A) | [0009-0006-0701-5821](https://orcid.org/0009-0006-0701-5821) |
-Raja Shahroz (Person B) | [0009-0003-5130-1049](https://orcid.org/0009-0003-5130-1049) |
-Emina Skrijelj(Person C) | [0009-0002-0794-5341](https://orcid.org/0009-0002-0794-5341) |
-Kerim Halilovic (Person D) | [0009-0001-9615-5191](https://orcid.org/0009-0001-9615-5191) |
+| Role | Name | ORCID |
+|---|---|---|
+| A | Azra Sisic | [0009-0006-0701-5821](https://orcid.org/0009-0006-0701-5821) |
+| B | Raja Shahroz | [0009-0003-5130-1049](https://orcid.org/0009-0003-5130-1049) |
+| C | Emina Skrijelj | [0009-0002-0794-5341](https://orcid.org/0009-0002-0794-5341) |
+| D | Kerim Halilovic | [0009-0001-9615-5191](https://orcid.org/0009-0001-9615-5191) |
 
 ---
 
