@@ -47,14 +47,14 @@
     {
       "@type": "SoftwareApplication",
       "name": "pandas",
-      "version": "3.0.2",
-      "identifier": "https://pypi.org/project/pandas/3.0.2/"
+      "version": "3.0.3",
+      "identifier": "https://pypi.org/project/pandas/3.0.3/"
     },
     {
       "@type": "SoftwareApplication",
       "name": "numpy",
-      "version": "2.4.4",
-      "identifier": "https://pypi.org/project/numpy/2.4.4/"
+      "version": "2.4.6",
+      "identifier": "https://pypi.org/project/numpy/2.4.6/"
     },
     {
       "@type": "SoftwareApplication",
@@ -65,8 +65,8 @@
     {
       "@type": "SoftwareApplication",
       "name": "matplotlib",
-      "version": "3.10.8",
-      "identifier": "https://pypi.org/project/matplotlib/3.10.8/"
+      "version": "3.10.9",
+      "identifier": "https://pypi.org/project/matplotlib/3.10.9/"
     },
     {
       "@type": "SoftwareApplication",
