@@ -1,0 +1,462 @@
+{
+  "@context": "https://w3id.org/ro/crate/1.1/context",
+  "@graph": [
+    {
+      "@type": "CreativeWork",
+      "@id": "ro-crate-metadata.json",
+      "conformsTo": {
+        "@id": "https://w3id.org/ro/crate/1.1"
+      },
+      "about": {
+        "@id": "./"
+      }
+    },
+    {
+      "@type": "Dataset",
+      "@id": "./",
+      "name": "Vienna Wet Month Prediction \u2013 FAIR ML Experiment (v1)",
+      "description": "A fully documented, FAIR-compliant machine learning experiment that predicts whether a calendar month in Vienna (Hohe Warte station) is a wet month, defined as total monthly precipitation >= 60 mm. The experiment includes input data, preprocessing and training code, trained models, evaluation outputs, and comprehensive metadata.",
+      "datePublished": "2026-05-23",
+      "license": {
+        "@id": "https://opensource.org/licenses/MIT"
+      },
+      "author": [
+        {
+          "@id": "https://orcid.org/0009-0006-0701-5821"
+        },
+        {
+          "@id": "https://orcid.org/0009-0002-0794-5341"
+        },
+        {
+          "@id": "https://orcid.org/0009-0001-9615-5191"
+        },
+        {
+          "@id": "https://orcid.org/0009-0003-5130-1049"
+        }
+      ],
+      "hasPart": [
+        {
+          "@id": "data/raw/weather_raw_vienna_hohewarte_v1.csv"
+        },
+        {
+          "@id": "src/models/train_model.py"
+        },
+        {
+          "@id": "src/models/evaluate_model.py"
+        },
+        {
+          "@id": "notebooks/t2_2_semantic_mapping.ipynb"
+        },
+        {
+          "@id": "notebooks/t2_3_unit_mapping.ipynb"
+        },
+        {
+          "@id": "notebooks/t2_4_create_dbrepo_views.ipynb"
+        },
+        {
+          "@id": "notebooks/t2_5_load_data_to_dbrepo.ipynb"
+        },
+        {
+          "@id": "notebooks/t2_6_api_reimplementation.ipynb"
+        },
+        {
+          "@id": "sql/create_schema.sql"
+        },
+        {
+          "@id": "sql/create_views.sql"
+        },
+        {
+          "@id": "outputs/models/model_logreg_v1.pkl"
+        },
+        {
+          "@id": "outputs/models/model_randomforest_v1.pkl"
+        },
+        {
+          "@id": "outputs/predictions/predictions_test_v1.csv"
+        },
+        {
+          "@id": "outputs/predictions/model_metrics_v1.csv"
+        },
+        {
+          "@id": "outputs/figures/fig_confusion_matrix_logreg_v1.png"
+        },
+        {
+          "@id": "outputs/figures/fig_confusion_matrix_randomforest_v1.png"
+        },
+        {
+          "@id": "outputs/figures/fig_model_comparison_v1.png"
+        },
+        {
+          "@id": "docs/fair4ml/fair4ml_logreg.json"
+        },
+        {
+          "@id": "docs/fair4ml/fair4ml_randomforest.json"
+        },
+        {
+          "@id": "docs/model-card.md"
+        },
+        {
+          "@id": "docs/croissant/weather_raw_hohewarte_croissant.json"
+        },
+        {
+          "@id": "docs/semantic_mapping.csv"
+        },
+        {
+          "@id": "docs/unit_mapping.csv"
+        },
+        {
+          "@id": "https://doi.org/10.70124/hnj2g-evp22"
+        },
+        {
+          "@id": "https://doi.org/10.70124/wn56q-hvb63"
+        },
+        {
+          "@id": "https://test.dbrepo.tuwien.ac.at/database/a181cad5-4bdb-48b2-937e-3e75293f6a7b/info"
+        }
+      ],
+      "relatedLink": [
+        {
+          "@id": "https://doi.org/10.5281/zenodo.20366443"
+        },
+        {
+          "@id": "https://github.com/Emina1998/Vienna-Weather-Wet-Month-Prediction"
+        },
+        {
+          "@id": "https://test.dbrepo.tuwien.ac.at/database/a181cad5-4bdb-48b2-937e-3e75293f6a7b/info"
+        }
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://orcid.org/0009-0006-0701-5821",
+      "name": "Azra Sisic",
+      "affiliation": "TU Wien"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://orcid.org/0009-0002-0794-5341",
+      "name": "Emina Skrijelj",
+      "affiliation": "TU Wien"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://orcid.org/0009-0001-9615-5191",
+      "name": "Kerim Halilovic",
+      "affiliation": "TU Wien"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://orcid.org/0009-0003-5130-1049",
+      "name": "Raja Shahroz",
+      "affiliation": "TU Wien"
+    },
+    {
+      "@type": "Dataset",
+      "@id": "data/raw/weather_raw_vienna_hohewarte_v1.csv",
+      "name": "Vienna Hohe Warte Raw Weather Data (v1)",
+      "description": "Monthly weather observations from the Hohe Warte meteorological station in Vienna, Austria, spanning 1872 to 2023. Published by Stadt Wien under CC BY 4.0.",
+      "encodingFormat": "text/csv",
+      "license": {
+        "@id": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "url": "https://www.data.gv.at/datasets/69a06550-1ede-4f50-9c36-e7fb5cf6e7e8"
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "src/models/train_model.py",
+      "name": "Model Training Script",
+      "description": "Trains Logistic Regression and Random Forest classifiers on the Vienna weather dataset to predict wet months. Outputs serialised model artefacts.",
+      "programmingLanguage": "Python",
+      "license": {
+        "@id": "https://opensource.org/licenses/MIT"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "src/models/evaluate_model.py",
+      "name": "Model Evaluation Script",
+      "description": "Evaluates trained models on the test split and produces metrics, predictions, and visualisation figures.",
+      "programmingLanguage": "Python",
+      "license": {
+        "@id": "https://opensource.org/licenses/MIT"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "notebooks/t2_2_semantic_mapping.ipynb",
+      "name": "Semantic Mapping Notebook (T2.2)",
+      "description": "Maps dataset attributes to ontological concepts for semantic interoperability.",
+      "programmingLanguage": "Python",
+      "license": {
+        "@id": "https://opensource.org/licenses/MIT"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "notebooks/t2_3_unit_mapping.ipynb",
+      "name": "Unit Mapping Notebook (T2.3)",
+      "description": "Maps numeric attributes to units of measurement using the SI Digital Framework ontology.",
+      "programmingLanguage": "Python",
+      "license": {
+        "@id": "https://opensource.org/licenses/MIT"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "notebooks/t2_4_create_dbrepo_views.ipynb",
+      "name": "DBRepo Views Notebook (T2.4)",
+      "description": "Creates SQL views in DBRepo for query-ready aggregations used in the ML pipeline.",
+      "programmingLanguage": "Python",
+      "license": {
+        "@id": "https://opensource.org/licenses/MIT"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "notebooks/t2_5_load_data_to_dbrepo.ipynb",
+      "name": "DBRepo Data Loading Notebook (T2.5)",
+      "description": "Loads the input weather dataset into DBRepo via the REST API.",
+      "programmingLanguage": "Python",
+      "license": {
+        "@id": "https://opensource.org/licenses/MIT"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "notebooks/t2_6_api_reimplementation.ipynb",
+      "name": "DBRepo API Reimplementation Notebook (T2.6)",
+      "description": "Reimplements data loading exclusively via the DBRepo REST API, replacing local file reads.",
+      "programmingLanguage": "Python",
+      "license": {
+        "@id": "https://opensource.org/licenses/MIT"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "sql/create_schema.sql",
+      "name": "Database Schema SQL",
+      "description": "SQL CREATE statements for the 3NF relational schema of the experiment input data in DBRepo.",
+      "programmingLanguage": "SQL",
+      "license": {
+        "@id": "https://opensource.org/licenses/MIT"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "sql/create_views.sql",
+      "name": "Database Views SQL",
+      "description": "SQL VIEW definitions that expose query-ready aggregations for the ML pipeline.",
+      "programmingLanguage": "SQL",
+      "license": {
+        "@id": "https://opensource.org/licenses/MIT"
+      }
+    },
+    {
+      "@type": [
+        "File",
+        "SoftwareApplication"
+      ],
+      "@id": "outputs/models/model_logreg_v1.pkl",
+      "name": "Trained Logistic Regression Model (v1)",
+      "description": "Serialised scikit-learn Pipeline containing a median imputer, standard scaler, and LogisticRegression classifier trained to predict wet months in Vienna.",
+      "encodingFormat": "application/octet-stream",
+      "license": {
+        "@id": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "identifier": "https://doi.org/10.70124/wn56q-hvb63",
+      "isPartOf": {
+        "@id": "https://doi.org/10.70124/wn56q-hvb63"
+      }
+    },
+    {
+      "@type": [
+        "File",
+        "SoftwareApplication"
+      ],
+      "@id": "outputs/models/model_randomforest_v1.pkl",
+      "name": "Trained Random Forest Model (v1)",
+      "description": "Serialised scikit-learn Pipeline containing a median imputer and RandomForestClassifier trained to predict wet months in Vienna.",
+      "encodingFormat": "application/octet-stream",
+      "license": {
+        "@id": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "identifier": "https://doi.org/10.70124/wn56q-hvb63",
+      "isPartOf": {
+        "@id": "https://doi.org/10.70124/wn56q-hvb63"
+      }
+    },
+    {
+      "@type": "Dataset",
+      "@id": "outputs/predictions/predictions_test_v1.csv",
+      "name": "Model Predictions on Test Split (v1)",
+      "description": "Predicted wet month labels for the test split (years >= 2020) produced by both trained models.",
+      "encodingFormat": "text/csv",
+      "license": {
+        "@id": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "isPartOf": {
+        "@id": "https://doi.org/10.70124/hnj2g-evp22"
+      }
+    },
+    {
+      "@type": "Dataset",
+      "@id": "outputs/predictions/model_metrics_v1.csv",
+      "name": "Model Evaluation Metrics (v1)",
+      "description": "Accuracy, precision, recall, and F1 scores for both models evaluated on the chronological test split.",
+      "encodingFormat": "text/csv",
+      "license": {
+        "@id": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "isPartOf": {
+        "@id": "https://doi.org/10.70124/hnj2g-evp22"
+      }
+    },
+    {
+      "@type": "ImageObject",
+      "@id": "outputs/figures/fig_confusion_matrix_logreg_v1.png",
+      "name": "Confusion Matrix \u2013 Logistic Regression (v1)",
+      "description": "Confusion matrix for the Logistic Regression model on the test split.",
+      "encodingFormat": "image/png",
+      "license": {
+        "@id": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "isPartOf": {
+        "@id": "https://doi.org/10.70124/hnj2g-evp22"
+      }
+    },
+    {
+      "@type": "ImageObject",
+      "@id": "outputs/figures/fig_confusion_matrix_randomforest_v1.png",
+      "name": "Confusion Matrix \u2013 Random Forest (v1)",
+      "description": "Confusion matrix for the Random Forest model on the test split.",
+      "encodingFormat": "image/png",
+      "license": {
+        "@id": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "isPartOf": {
+        "@id": "https://doi.org/10.70124/hnj2g-evp22"
+      }
+    },
+    {
+      "@type": "ImageObject",
+      "@id": "outputs/figures/fig_model_comparison_v1.png",
+      "name": "Model Comparison Figure (v1)",
+      "description": "Bar chart comparing evaluation metrics between Logistic Regression and Random Forest models.",
+      "encodingFormat": "image/png",
+      "license": {
+        "@id": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "isPartOf": {
+        "@id": "https://doi.org/10.70124/hnj2g-evp22"
+      }
+    },
+    {
+      "@type": "CreativeWork",
+      "@id": "docs/fair4ml/fair4ml_logreg.json",
+      "name": "FAIR4ML Metadata \u2013 Logistic Regression (v1)",
+      "description": "FAIR4ML-compliant metadata for the trained Logistic Regression model including hyperparameters, evaluation metrics, intended use, and known limitations.",
+      "encodingFormat": "application/json",
+      "about": {
+        "@id": "outputs/models/model_logreg_v1.pkl"
+      }
+    },
+    {
+      "@type": "CreativeWork",
+      "@id": "docs/fair4ml/fair4ml_randomforest.json",
+      "name": "FAIR4ML Metadata \u2013 Random Forest (v1)",
+      "description": "FAIR4ML-compliant metadata for the trained Random Forest model including hyperparameters, evaluation metrics, intended use, and known limitations.",
+      "encodingFormat": "application/json",
+      "about": {
+        "@id": "outputs/models/model_randomforest_v1.pkl"
+      }
+    },
+    {
+      "@type": "CreativeWork",
+      "@id": "docs/model-card.md",
+      "name": "Model Card \u2013 Vienna Wet Month Classifiers (v1)",
+      "description": "Model card covering both trained classifiers with sections on model description, intended use, out-of-scope uses, training data, evaluation results, limitations, ethical considerations, and licence.",
+      "encodingFormat": "text/markdown",
+      "about": [
+        {
+          "@id": "outputs/models/model_logreg_v1.pkl"
+        },
+        {
+          "@id": "outputs/models/model_randomforest_v1.pkl"
+        }
+      ]
+    },
+    {
+      "@type": "CreativeWork",
+      "@id": "docs/croissant/weather_raw_hohewarte_croissant.json",
+      "name": "Croissant Metadata \u2013 Vienna Hohe Warte Weather Dataset",
+      "description": "Croissant JSON-LD metadata record describing the input dataset fields, data types, units, distribution, and licence.",
+      "encodingFormat": "application/json",
+      "about": {
+        "@id": "data/raw/weather_raw_vienna_hohewarte_v1.csv"
+      }
+    },
+    {
+      "@type": "CreativeWork",
+      "@id": "docs/semantic_mapping.csv",
+      "name": "Semantic Mapping Table",
+      "description": "Mapping of all dataset attributes to ontological concepts.",
+      "encodingFormat": "text/csv"
+    },
+    {
+      "@type": "CreativeWork",
+      "@id": "docs/unit_mapping.csv",
+      "name": "Unit Mapping Table",
+      "description": "Mapping of all numeric attributes to units of measurement using the SI Digital Framework ontology.",
+      "encodingFormat": "text/csv"
+    },
+    {
+      "@type": "CreativeWork",
+      "@id": "https://doi.org/10.5281/zenodo.20366443",
+      "name": "Vienna Wet Month Prediction \u2013 Zenodo Release",
+      "description": "Zenodo deposit of the GitHub repository, minted via the GitHub-Zenodo integration.",
+      "url": "https://doi.org/10.5281/zenodo.20366443"
+    },
+    {
+      "@type": "Dataset",
+      "@id": "https://doi.org/10.70124/hnj2g-evp22",
+      "name": "Generated Output Data \u2013 Vienna Wet Month Prediction (v1)",
+      "description": "TUWRD deposit containing generated output data: predictions, evaluation metrics, and figures.",
+      "url": "https://doi.org/10.70124/hnj2g-evp22",
+      "license": {
+        "@id": "https://creativecommons.org/licenses/by/4.0/"
+      }
+    },
+    {
+      "@type": [
+        "Dataset",
+        "SoftwareApplication"
+      ],
+      "@id": "https://doi.org/10.70124/wn56q-hvb63",
+      "name": "Trained ML Models \u2013 Vienna Wet Month Prediction (v1)",
+      "description": "TUWRD deposit containing trained model artefacts and FAIR4ML metadata files.",
+      "url": "https://doi.org/10.70124/wn56q-hvb63",
+      "license": {
+        "@id": "https://creativecommons.org/licenses/by/4.0/"
+      }
+    },
+    {
+      "@type": "Dataset",
+      "@id": "https://test.dbrepo.tuwien.ac.at/database/a181cad5-4bdb-48b2-937e-3e75293f6a7b/info",
+      "name": "Vienna Weather Wet Months \u2013 DBRepo Database",
+      "description": "Relational database in DBRepo containing the experiment input data in 3NF with semantic annotations and unit mappings.",
+      "url": "https://test.dbrepo.tuwien.ac.at/database/a181cad5-4bdb-48b2-937e-3e75293f6e7b/info"
+    },
+    {
+      "@type": "CreativeWork",
+      "@id": "https://opensource.org/licenses/MIT",
+      "name": "MIT License",
+      "identifier": "MIT"
+    },
+    {
+      "@type": "CreativeWork",
+      "@id": "https://creativecommons.org/licenses/by/4.0/",
+      "name": "Creative Commons Attribution 4.0 International",
+      "identifier": "CC-BY-4.0"
+    }
+  ]
+}

@@ -9,6 +9,8 @@ The experiment trains two binary classifiers — Logistic Regression and Random
 Forest — on monthly meteorological data published by Stadt Wien under CC BY 4.0.
 All data is stored and retrieved from DBRepo. The full experiment is reproducible from this repository.
 
+The experiment is described by an [RO-Crate](ro-crate-metadata.json) metadata file in the repository root.
+
 ---
 
 ## Requirements and installation

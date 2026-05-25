@@ -42,11 +42,11 @@ practices in open science, like data citation, metadata standards and model docu
 ## 3. Out-of-Scope Uses
 
 These models are **not** intended for operational weather forecasting or any climate-sensitive
-decision-making in real-world applications. They should not be applied to meteorological stations
+decision making in real world applications. They should not be applied to meteorological stations
 other than Hohe Warte (Vienna) without retraining and thorough validation on local data, as the
 models have been trained exclusively on one station's historical record. They are not suitable for
 predicting extreme precipitation events, short-term weather forecasts, or for use in flood risk
-assessment, agricultural planning, or any safety-critical context.
+assessment, agricultural planning, or any safety critical context.
 
 ---
 
@@ -58,13 +58,13 @@ Stadt Wien / MA 23 and published on the Austrian open government data portal und
 **CC BY 4.0** licence.
 
 - **Source URL**: https://www.data.gv.at/datasets/69a06550-1ede-4f50-9c36-e7fb5cf6e7e8
-- **TUWRD deposit DOI**: `PLACEHOLDER_TUWRD_MODEL_DEPOSIT_DOI` *(update after T3.9 deposit)*
-- **Split strategy**: Chronological — training on years ≤ 2016, validation on 2017–2019, test on
+- **TUWRD deposit DOI**: `https://doi.org/10.70124/wn56q-hvb63` 
+- **Split strategy**: Chronological - training on years ≤ 2016, validation on 2017-2019, test on
   years ≥ 2020
 - **Features**: 27 meteorological and spatial features including temperature (mean, max, min),
   atmospheric pressure, relative humidity, wind velocity, sunshine hours, precipitation-day counts,
   and station coordinates
-- **Target**: Binary label `wet_month_label` — 1 if monthly precipitation ≥ 60 mm, else 0
+- **Target**: Binary label `wet_month_label` - 1 if monthly precipitation ≥ 60 mm, else 0
 - **Missing values**: Median imputation applied to all numeric features prior to training
 
 ---
@@ -129,8 +129,7 @@ Licence text: https://creativecommons.org/licenses/by/4.0/
 
 ## References
 
-- FAIR4ML metadata (Logistic Regression): `docs/fair4ml/fair4ml_logreg_v1.json`
-- FAIR4ML metadata (Random Forest): `docs/fair4ml/fair4ml_randomforest_v1.json`
-- RO-Crate: `ro-crate-metadata.json` *(to be added — T3.1)*
+- FAIR4ML metadata (Logistic Regression): `docs/fair4ml/fair4ml_logreg.json`
+- FAIR4ML metadata (Random Forest): `docs/fair4ml/fair4ml_randomforest.json`
 - Source dataset: https://www.data.gv.at/datasets/69a06550-1ede-4f50-9c36-e7fb5cf6e7e8
 - Code repository: https://github.com/Emina1998/Vienna-Weather-Wet-Month-Prediction
