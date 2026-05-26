@@ -1,6 +1,6 @@
 # Vienna Weather Wet-Month Prediction
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20364604.svg)](https://doi.org/10.5281/zenodo.20364604)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20366443.svg)](https://doi.org/10.5281/zenodo.20366443)
 
 A reproducible, FAIR-compliant machine learning experiment that predicts whether
 a given calendar month in Vienna is a "wet month" (total precipitation ≥ 60 mm)
