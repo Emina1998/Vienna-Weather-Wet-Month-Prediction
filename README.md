@@ -15,7 +15,7 @@ The experiment is described by an [RO-Crate](ro-crate-metadata.json) metadata fi
 
 ## Requirements and installation
 
-**Python version:** 3.11.0
+**Python version:** 3.10
 
 Install dependencies using pip:
 
@@ -183,8 +183,8 @@ weather_processed_monthly_v1.csv
 
 #### Figures
 
-fig_distribution_precipitation_v1.png
-fig_confusion_matrix_rf_v1.png
+fig_confusion_matrix_logreg_v1.png
+fig_confusion_matrix_randomforest_v1.png
 fig_model_comparison_v1.png
 
 #### Models
@@ -203,10 +203,6 @@ preprocess_data.py
 train_model.py
 evaluate_model.py
 
-#### Configuration files
-
-config_model.yaml
-config_data.yaml
 
 ## Ontology selection
 
@@ -273,7 +269,7 @@ The file covers all 38 columns across the three tables.
 
 ## DBRepo metadata integration
 
-Semantic mappings are added to DBRepo metadata via the REST API using the notebook at `notebooks/t2_2_semantic_mapping_upload.ipynb`.
+Semantic mappings are added to DBRepo metadata via the REST API using the notebook at `notebooks/t2_2_semantic_mapping.ipynb`.
 
 ## Unit mapping
 

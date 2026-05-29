@@ -28,10 +28,10 @@ codemeta = {
     "programmingLanguage": {
         "@type": "ComputerLanguage",
         "name": "Python",
-        "version": "3.11",
+        "version": "3.10",
         "url": "https://www.python.org/"
     },
-    "runtimePlatform": "CPython 3.11",
+    "runtimePlatform": "CPython 3.10",
     "operatingSystem": "Linux, macOS, Windows",
     "readme": "https://github.com/Emina1998/Vienna-Weather-Wet-Month-Prediction/blob/main/README.md",
     "author": [

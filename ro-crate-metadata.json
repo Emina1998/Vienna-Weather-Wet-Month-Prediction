@@ -195,7 +195,7 @@
       "@type": "SoftwareSourceCode",
       "@id": "notebooks/t2_3_unit_mapping.ipynb",
       "name": "Unit Mapping Notebook (T2.3)",
-      "description": "Maps numeric attributes to units of measurement using the SI Digital Framework ontology.",
+      "description": "Maps numeric attributes to units of measurement using the OM-2 ontology.",
       "programmingLanguage": "Python",
       "license": {
         "@id": "https://opensource.org/licenses/MIT"
@@ -406,7 +406,7 @@
       "@type": "CreativeWork",
       "@id": "docs/unit_mapping.csv",
       "name": "Unit Mapping Table",
-      "description": "Mapping of all numeric attributes to units of measurement using the SI Digital Framework ontology.",
+      "description": "Mapping of all numeric attributes to units of measurement using the OM-2 ontology.",
       "encodingFormat": "text/csv"
     },
     {
